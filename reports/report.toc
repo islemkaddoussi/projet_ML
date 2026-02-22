@@ -6,10 +6,10 @@
 \contentsline {subsection}{\numberline {3.1}Valeurs Manquantes}{2}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Valeurs Suspectes et Codes Erreurs}{2}{subsection.3.2}%
 \contentsline {section}{\numberline {4}Visualisations et Distributions}{2}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Histogrammes (Distributions)}{2}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Boxplots (Détection des Outliers)}{2}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.1}Histogrammes (Distributions)}{3}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Boxplots (Détection des Outliers)}{3}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Analyse de Corrélation}{3}{section.5}%
-\contentsline {section}{\numberline {6}Stratégie de Modélisation (Clustering)}{3}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Justification de l'approche}{3}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Variables de Cohorte et Ancienneté}{3}{subsection.6.2}%
+\contentsline {section}{\numberline {6}Stratégie de Modélisation (Clustering)}{4}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Justification de l'approche}{4}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Variables de Cohorte et Ancienneté}{4}{subsection.6.2}%
 \contentsline {section}{\numberline {7}Synthèse des Problèmes et Prochaines Étapes}{4}{section.7}%

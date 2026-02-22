@@ -17,7 +17,9 @@
 \usepackage{multicol}
 \usepackage{listings}
 \usepackage{tcolorbox}
-\usepackage{amssymb}  
+\usepackage{amssymb}
+\usepackage{float}
+ 
 
 \geometry{margin=2cm}
 \pagestyle{fancy}
@@ -68,7 +70,7 @@
 \vspace{0.5cm}
 {\large \textit{Chaîne complète : Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement}}\par
 \vspace{2cm}
-{\large \textbf{Préparé par : [Votre Nom]}}
+{\large \textbf{Préparé par : Islem Kaddoussi}}
 \vspace{3cm}
 
 \begin{tikzpicture}
@@ -136,27 +138,30 @@ Nous avons détecté des valeurs "sentinelles" qui ne sont pas des données rée
 
 \subsection{Histogrammes (Distributions)}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{histograms.png}
 \caption{Distribution des variables RFM et de l'âge}
+\clearpage
 \end{figure}
 
 \subsection{Boxplots (Détection des Outliers)}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{boxplots.png}
 \caption{Analyse des valeurs aberrantes sur les variables monétaires}
+\clearpage
 \end{figure}
 Les graphiques montrent des clients "extrêmes" avec des dépenses dépassant 10 000 unités. Ces outliers devront être traités pour ne pas biaiser le clustering.
 
 \section{Analyse de Corrélation}
 La matrice de corrélation montre des liens forts entre certaines variables (ex: \textit{MonetaryTotal} et \textit{Frequency}).
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{correlations.png}
 \caption{Matrice de corrélation des caractéristiques numériques}
+\clearpage
 \end{figure}
 
 \section{Stratégie de Modélisation (Clustering)}
