@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  22 FEB 2026 14:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  22 FEB 2026 14:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -751,7 +751,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.86 \newpage
               [1]
-<histograms.png, id=94, 860.013pt x 569.9694pt>
+<histograms.png, id=104, 860.013pt x 569.9694pt>
 File: histograms.png Graphic file (type png)
 <use histograms.png>
 Package pdftex.def Info: histograms.png  used on input line 145.
@@ -770,12 +770,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has 
                                                   \__shipout_drop_firstpage_...
 l.149 
       ]
-<boxplots.png, id=103, 1077.0639pt x 353.1594pt>
+<boxplots.png, id=113, 1077.0639pt x 353.1594pt>
 File: boxplots.png Graphic file (type png)
 <use boxplots.png>
 Package pdftex.def Info: boxplots.png  used on input line 154.
 (pdftex.def)             Requested size: 386.95897pt x 126.87862pt.
-<correlations.png, id=104, 680.0607pt x 569.9694pt>
+<correlations.png, id=114, 680.0607pt x 569.9694pt>
 File: correlations.png Graphic file (type png)
 <use correlations.png>
 Package pdftex.def Info: correlations.png  used on input line 164.
@@ -803,6 +803,12 @@ l.168
       
 
  <./histograms.png> <./boxplots.png>]
+<scatter_rfm.png, id=123, 521.7894pt x 395.076pt>
+File: scatter_rfm.png Graphic file (type png)
+<use scatter_rfm.png>
+Package pdftex.def Info: scatter_rfm.png  used on input line 173.
+(pdftex.def)             Requested size: 338.58632pt x 256.3623pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -814,10 +820,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.194 \end{document}
-                    
+l.176 
+      
 
  <./correlations.png>]
+<rfm_segment.png, id=130, 715.473pt x 352.9185pt>
+File: rfm_segment.png Graphic file (type png)
+<use rfm_segment.png>
+Package pdftex.def Info: rfm_segment.png  used on input line 181.
+(pdftex.def)             Requested size: 338.58632pt x 167.01335pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -825,26 +837,44 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[5] (report.aux)
+[5
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.196 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.196 
+       <./scatter_rfm.png> <./rfm_segment.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[6] (report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: F8900D64626719B30FDDF3748E541F13;2994.
+(rerunfilecheck)             Checksum: 69309E9DEFD56A8C277638F9F2149ABC;3469.
  ) 
 Here is how much of TeX's memory you used:
- 26915 strings out of 474486
- 511222 string characters out of 5743755
- 1938542 words of memory out of 5000000
- 48762 multiletter control sequences out of 15000+600000
+ 26936 strings out of 474486
+ 511610 string characters out of 5743755
+ 1939542 words of memory out of 5000000
+ 48778 multiletter control sequences out of 15000+600000
  574724 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,11n,87p,451b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (6 pages, 722519 bytes).
+Output written on report.pdf (7 pages, 927881 bytes).
 PDF statistics:
- 518 PDF objects out of 1000 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
- 140 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 548 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
+ 166 words of extra memory for PDF output out of 10000 (max. 10000000)
 

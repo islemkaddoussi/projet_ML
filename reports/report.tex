@@ -166,6 +166,22 @@ La matrice de corrélation montre des liens forts entre certaines variables (ex:
 \clearpage
 \end{figure}
 
+\subsection{Relation Fréquence vs Montant}
+Le nuage de points ci-dessous montre la relation entre le nombre d'achats et le montant total dépensé. On observe une concentration massive de clients à faible fréquence/faible montant, mais également quelques "outliers" à très forte valeur (plus de 250 000 unités) qui tirent la moyenne vers le haut.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{scatter_rfm.png}
+    \caption{Corrélation entre fréquence d'achat et montant total}
+\end{figure}
+
+\subsection{Distribution des Segments RFM Initiaux}
+L'analyse de la segmentation existante montre que la majorité des clients sont actuellement classés comme "Potentiels" (environ 1600 clients), suivis par les "Fidèles". Les segments "Champions" et "Dormants" sont moins représentés, ce qui justifie notre future modélisation K-Means pour mieux cibler ces groupes.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{rfm_segment.png}
+    \caption{Répartition des clients par segment RFM}
+\end{figure}
+
 \section{Stratégie de Modélisation (Clustering)}
 
 \subsection{Justification de l'approche}

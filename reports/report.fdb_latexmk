@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1771767575.73735 "c:/Users/Islam/Documents/projet_ML/reports/report.tex" "report.pdf" "report" 1771767579.98404 0
+["pdflatex"] 1771768079.8911 "c:/Users/Islam/Documents/projet_ML/reports/report.tex" "report.pdf" "report" 1771768083.32752 0
   "C:/Users/Islam/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1771766044 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Islam/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1095.pk" 1771765101 28976 ed093270ee3b61757a7460f8f9a6fd99 ""
   "C:/Users/Islam/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/ecbx1200.pk" 1771764317 31952 5f6e9de178d550fbd131ed5b37403b1d ""
@@ -187,13 +187,15 @@
   "C:/Users/Islam/AppData/Local/Programs/MiKTeX/tex/latex/url/url.sty" 1388490452 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "C:/Users/Islam/AppData/Local/Programs/MiKTeX/tex/latex/xcolor/xcolor.sty" 1700127522 55487 80a65caedd3722f4c20a14a69e785d8f ""
   "boxplots.png" 1771766442 128926 179450b5ee93a1a15472fe8576637388 ""
-  "c:/Users/Islam/Documents/projet_ML/reports/report.tex" 1771767575 7423 787df5db71fdbb8b6ce2c67ad30cb12e ""
+  "c:/Users/Islam/Documents/projet_ML/reports/report.tex" 1771768075 8500 ab42234b0dc9e3187cbceb33adffa3cc ""
   "correlations.png" 1771766439 242299 6c7645fc10d22ac4bf526bb6457bc004 ""
   "histograms.png" 1771766437 173491 7af76e8c6b731c918b5712ea506ceff1 ""
-  "report.aux" 1771767579 2867 ab00e2b38c2a02a0370026ee0e5cde3e "pdflatex"
-  "report.out" 1771767579 2994 f8900d64626719b30fddf3748e541f13 "pdflatex"
-  "report.tex" 1771767575 7423 787df5db71fdbb8b6ce2c67ad30cb12e ""
-  "report.toc" 1771767579 1318 6ab61d629dcf9348d47a7bbd941681f8 "pdflatex"
+  "report.aux" 1771768083 3465 a63cb46ef9cce6120916ef09545f0917 "pdflatex"
+  "report.out" 1771768083 3469 69309e9defd56a8c277638f9f2149abc "pdflatex"
+  "report.tex" 1771768075 8500 ab42234b0dc9e3187cbceb33adffa3cc ""
+  "report.toc" 1771768083 1518 94b5f40ecccc0a07fddbcd3164097b38 "pdflatex"
+  "rfm_segment.png" 1771766448 82405 38ea39d7f3bff70a9e01df8ad06123ba ""
+  "scatter_rfm.png" 1771766446 136561 c22ba2de6fbc7ce21fba59491a7cc5cd ""
   (generated)
   "report.aux"
   "report.log"
