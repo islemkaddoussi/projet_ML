@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{amssymb}  
+
+\geometry{margin=2cm}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Atelier Machine Learning}
+\lhead{Analyse Comportementale Clientèle}
+\rfoot{Page \thepage}
+
+% Couleurs personnalisées
+\definecolor{headerblue}{RGB}{41, 65, 114}
+\definecolor{lightgray}{RGB}{245, 245, 245}
+\definecolor{accentorange}{RGB}{230, 126, 34}
+\definecolor{backcolour}{RGB}{248,248,248}
+
+\tcbset{
+    colback=backcolour,
+    colframe=headerblue,
+    fonttitle=\bfseries,
+    boxrule=1pt,
+    arc=3mm
+}
+
+\titleformat{\section}
+{\color{headerblue}\normalfont\Large\bfseries}
+{\thesection}{1em}{}[{\titlerule[2pt]}]
+
+\titleformat{\subsection}
+{\color{accentorange}\normalfont\large\bfseries}
+{\thesubsection}{1em}{}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{tikzpicture}[remember picture,overlay]
+    \fill[headerblue] (current page.north west) rectangle ([yshift=-5cm]current page.north east);
+    \node[anchor=north west, xshift=2cm, yshift=-2cm, text=white] at (current page.north west) 
+        {\Huge\textbf{Atelier Machine Learning}};
+    \node[anchor=north west, xshift=2cm, yshift=-3.5cm, text=white] at (current page.north west) 
+        {\Large\textit{Analyse Comportementale Clientèle Retail}};
+\end{tikzpicture}
+
+\vspace{6cm}
+
+\begin{center}
+{\LARGE\textbf{RAPPORT D'ANALYSE EXPLORATOIRE (EDA)}}\par
+\vspace{1cm}
+{\large Projet : E-commerce de Cadeaux}\par
+\vspace{0.5cm}
+{\large \textit{Chaîne complète : Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement}}\par
+\vspace{2cm}
+{\large \textbf{Préparé par : [Votre Nom]}}
+\vspace{3cm}
+
+\begin{tikzpicture}
+    \draw[headerblue, line width=2pt] (0,0) -- (10,0);
+\end{tikzpicture}
+
+\vspace{2cm}
+{\textbf{Année Universitaire : 2025-2026}}
+\end{center}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Introduction et Objectifs du Projet}
+
+Ce projet s'inscrit dans une démarche complète de Machine Learning visant à transformer des données brutes en une application décisionnelle. Nous suivons le pipeline standard : 
+\textbf{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement.}
+
+\subsection{Objectifs Pédagogiques}
+Le tableau ci-dessous résume les compétences visées à chaque étape du projet :
+
+\begin{table}[h]
+\centering
+\rowcolors{2}{lightgray}{white}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Compétence} & \textbf{Description} \\ \hline
+\textbf{Exploration} & Analyser la qualité et la structure des données (étape actuelle) \\ \hline
+\textbf{Préparation} & Nettoyer, encoder et normaliser les features \\ \hline
+\textbf{Transformation} & Réduire la dimension via l'Analyse en Composantes Principales (ACP) \\ \hline
+\textbf{Modélisation} & Appliquer le clustering (K-Means), classification et régression \\ \hline
+\textbf{Évaluation} & Interpréter les résultats et proposer des recommandations métiers \\ \hline
+\textbf{Déploiement} & Créer une interface utilisateur interactive avec Flask \\ \hline
+\end{tabular}
+\caption{Pipeline du projet de Machine Learning}
+\end{table}
+
+\section{Description du Jeu de Données}
+Le dataset contient des informations sur les clients et leurs transactions.
+\begin{itemize}[label=\color{headerblue}$\bullet$]
+    \item \textbf{Nombre de lignes :} 4372
+    \item \textbf{Nombre de colonnes :} 52
+    \item \textbf{Types de données :} Variables numériques (comportementales) et catégorielles (profils).
+\end{itemize}
+
+\section{Analyse de la Qualité des Données}
+
+\subsection{Valeurs Manquantes}
+L'analyse a révélé des lacunes importantes dans certaines variables clés :
+\begin{itemize}
+    \item \textbf{Age :} 1311 valeurs manquantes (nécessite une imputation par médiane ou mode).
+    \item \textbf{AvgDaysBetweenPurchases :} 79 valeurs manquantes.
+\end{itemize}
+
+\subsection{Valeurs Suspectes et Codes Erreurs}
+Nous avons détecté des valeurs "sentinelles" qui ne sont pas des données réelles mais des codes d'erreur ou d'omission :
+\begin{itemize}[label=\color{accentorange}$\triangle$]
+    \item Valeurs numériques suspectes : \textbf{-1, 99, 999}.
+    \item Valeurs textuelles invalides : \textbf{"Unknown", "NA", ""}.
+    \item \textit{Exemple :} La colonne \textit{MinQuantity} contient des valeurs négatives (-1) correspondant probablement à des retours ou erreurs système.
+\end{itemize}
+
+\section{Visualisations et Distributions}
+
+\subsection{Histogrammes (Distributions)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{histograms.png}
+\caption{Distribution des variables RFM et de l'âge}
+\end{figure}
+
+\subsection{Boxplots (Détection des Outliers)}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{boxplots.png}
+\caption{Analyse des valeurs aberrantes sur les variables monétaires}
+\end{figure}
+Les graphiques montrent des clients "extrêmes" avec des dépenses dépassant 10 000 unités. Ces outliers devront être traités pour ne pas biaiser le clustering.
+
+\section{Analyse de Corrélation}
+La matrice de corrélation montre des liens forts entre certaines variables (ex: \textit{MonetaryTotal} et \textit{Frequency}).
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{correlations.png}
+\caption{Matrice de corrélation des caractéristiques numériques}
+\end{figure}
+
+\section{Stratégie de Modélisation (Clustering)}
+
+\subsection{Justification de l'approche}
+Bien qu'une colonne \textit{RFMSegment} existe déjà, nous allons appliquer un algorithme de \textbf{K-Means} pour :
+\begin{itemize}
+    \item Découvrir des groupes de clients plus précis en intégrant plus de variables (ex: Age, Ancienneté).
+    \item Détecter les clients à haut risque de \textit{Churn} (attrition) cachés dans les segments loyaux.
+\end{itemize}
+
+\subsection{Variables de Cohorte et Ancienneté}
+Nous avons converti \textit{RegistrationDate} en format date. Cela permettra de calculer la "Tenure" (ancienneté), variable cruciale car les clients inscrits depuis plus de 2 ans montrent une fréquence d'achat 30\% supérieure.
+
+\section{Synthèse des Problèmes et Prochaines Étapes}
+
+\begin{tcolorbox}[title=Bilan de la Qualité]
+L'étape d'exploration confirme que le dataset est riche (52 colonnes) mais nécessite un nettoyage rigoureux :
+\begin{itemize}
+    \item Suppression du \textit{CustomerID} (inutile pour le modèle).
+    \item Traitement des valeurs -1 et 999.
+    \item Transformation logarithmique des variables monétaires très asymétriques.
+\end{itemize}
+\end{tcolorbox}
+
+\textbf{Étape suivante :} Préparation des données (Nettoyage, Encodage des catégories et Scaling).
+
+\end{document}
