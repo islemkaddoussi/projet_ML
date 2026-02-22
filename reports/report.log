@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  22 FEB 2026 14:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  22 FEB 2026 14:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -754,7 +754,7 @@ l.86 \newpage
 <histograms.png, id=94, 860.013pt x 569.9694pt>
 File: histograms.png Graphic file (type png)
 <use histograms.png>
-Package pdftex.def Info: histograms.png  used on input line 143.
+Package pdftex.def Info: histograms.png  used on input line 145.
 (pdftex.def)             Requested size: 386.95897pt x 256.45776pt.
 
 
@@ -768,17 +768,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.147 
+l.149 
       ]
 <boxplots.png, id=103, 1077.0639pt x 353.1594pt>
 File: boxplots.png Graphic file (type png)
 <use boxplots.png>
-Package pdftex.def Info: boxplots.png  used on input line 152.
+Package pdftex.def Info: boxplots.png  used on input line 154.
 (pdftex.def)             Requested size: 386.95897pt x 126.87862pt.
 <correlations.png, id=104, 680.0607pt x 569.9694pt>
 File: correlations.png Graphic file (type png)
 <use correlations.png>
-Package pdftex.def Info: correlations.png  used on input line 162.
+Package pdftex.def Info: correlations.png  used on input line 164.
 (pdftex.def)             Requested size: 386.95897pt x 324.32933pt.
 
 
@@ -792,14 +792,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.166 
+l.168 
       
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.166 
+l.168 
       
 
  <./histograms.png> <./boxplots.png>]
@@ -814,7 +814,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.192 \end{document}
+l.194 \end{document}
                     
 
  <./correlations.png>]
@@ -831,7 +831,7 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 12E1642A20B14F235DF6A368846EA7F4;3017.
+(rerunfilecheck)             Checksum: F8900D64626719B30FDDF3748E541F13;2994.
  ) 
 Here is how much of TeX's memory you used:
  26915 strings out of 474486
@@ -842,7 +842,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  84i,11n,87p,451b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on report.pdf (6 pages, 722114 bytes).
+Output written on report.pdf (6 pages, 722519 bytes).
 PDF statistics:
  518 PDF objects out of 1000 (max. 8388607)
  24 named destinations out of 1000 (max. 500000)

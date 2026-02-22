@@ -87,7 +87,7 @@
 
 \section{Introduction et Objectifs du Projet}
 
-Ce projet s'inscrit dans une démarche complète de Machine Learning visant à transformer des données brutes en une application décisionnelle. Nous suivons le pipeline standard : 
+Ce projet s'inscrit dans une démarche complète de Machine Learning visant à transformer des données brutes en une application décisionnelle. Nous suivons le pipeline standard :      
 \textbf{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement.}
 
 \subsection{Objectifs Pédagogiques}
@@ -126,12 +126,14 @@ L'analyse a révélé des lacunes importantes dans certaines variables clés :
     \item \textbf{AvgDaysBetweenPurchases :} 79 valeurs manquantes.
 \end{itemize}
 
-\subsection{Valeurs Suspectes et Codes Erreurs}
-Nous avons détecté des valeurs "sentinelles" qui ne sont pas des données réelles mais des codes d'erreur ou d'omission :
+
+\subsection{Anomalies et Valeurs Suspectes}
+Au-delà des valeurs nulles, l'analyse a révélé des codes erreurs ou des valeurs sentinelles (-1, 99, 999) :
 \begin{itemize}[label=\color{accentorange}$\triangle$]
-    \item Valeurs numériques suspectes : \textbf{-1, 99, 999}.
-    \item Valeurs textuelles invalides : \textbf{"Unknown", "NA", ""}.
-    \item \textit{Exemple :} La colonne \textit{MinQuantity} contient des valeurs négatives (-1) correspondant probablement à des retours ou erreurs système.
+    \item \textbf{Quantités :} 349 valeurs à \textbf{-1} dans la colonne \textit{MinQuantity}.
+    \item \textbf{Scores :} Des valeurs \textbf{-1} et \textbf{99} détectées dans \textit{SatisfactionScore}.
+    \item \textbf{Support :} 87 valeurs à \textbf{999} dans \textit{SupportTicketsCount}.
+    \item \textbf{Profils :} 1 649 clients avec un genre marqué comme \textit{"Unknown"}.
 \end{itemize}
 
 \section{Visualisations et Distributions}
@@ -190,3 +192,4 @@ L'étape d'exploration confirme que le dataset est riche (52 colonnes) mais néc
 \textbf{Étape suivante :} Préparation des données (Nettoyage, Encodage des catégories et Scaling).
 
 \end{document}
+

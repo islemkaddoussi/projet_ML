@@ -4,7 +4,7 @@
 \contentsline {section}{\numberline {2}Description du Jeu de Données}{2}{section.2}%
 \contentsline {section}{\numberline {3}Analyse de la Qualité des Données}{2}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Valeurs Manquantes}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Valeurs Suspectes et Codes Erreurs}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Anomalies et Valeurs Suspectes}{2}{subsection.3.2}%
 \contentsline {section}{\numberline {4}Visualisations et Distributions}{2}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Histogrammes (Distributions)}{3}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Boxplots (Détection des Outliers)}{3}{subsection.4.2}%
