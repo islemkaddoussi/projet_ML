@@ -4,7 +4,6 @@
 \usepackage[french]{babel}
 \usepackage{geometry}
 \usepackage{booktabs}
-\usepackage{longtable}
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage{colortbl}
@@ -19,7 +18,7 @@
 \usepackage{tcolorbox}
 \usepackage{amssymb}
 \usepackage{float}
- 
+\usepackage{amsmath}
 
 \geometry{margin=2cm}
 \pagestyle{fancy}
@@ -33,6 +32,7 @@
 \definecolor{lightgray}{RGB}{245, 245, 245}
 \definecolor{accentorange}{RGB}{230, 126, 34}
 \definecolor{backcolour}{RGB}{248,248,248}
+\definecolor{warningred}{RGB}{220, 53, 69}
 
 \tcbset{
     colback=backcolour,
@@ -52,6 +52,10 @@
 
 \begin{document}
 
+% =============================================================================
+% PAGE DE GARDE (TONNE)
+% =============================================================================
+
 \begin{titlepage}
 \begin{tikzpicture}[remember picture,overlay]
     \fill[headerblue] (current page.north west) rectangle ([yshift=-5cm]current page.north east);
@@ -64,13 +68,13 @@
 \vspace{6cm}
 
 \begin{center}
-{\LARGE\textbf{RAPPORT D'ANALYSE EXPLORATOIRE (EDA)}}\par
+{\LARGE\textbf{RAPPORT D'ANALYSE}}\par
 \vspace{1cm}
 {\large Projet : E-commerce de Cadeaux}\par
 \vspace{0.5cm}
-{\large \textit{Chaîne complète : Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement}}\par
+{\large \textit{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation}}\par
 \vspace{2cm}
-{\large \textbf{Préparé par : Islem Kaddoussi}}
+{\large \textbf{Préparé par : [TON NOM]}}
 \vspace{3cm}
 
 \begin{tikzpicture}
@@ -85,13 +89,16 @@
 \tableofcontents
 \newpage
 
+% =============================================================================
+% SECTION 1: INTRODUCTION (TONNE)
+% =============================================================================
+
 \section{Introduction et Objectifs du Projet}
 
 Ce projet s'inscrit dans une démarche complète de Machine Learning visant à transformer des données brutes en une application décisionnelle. Nous suivons le pipeline standard :      
 \textbf{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement.}
 
 \subsection{Objectifs Pédagogiques}
-Le tableau ci-dessous résume les compétences visées à chaque étape du projet :
 
 \begin{table}[h]
 \centering
@@ -99,113 +106,228 @@ Le tableau ci-dessous résume les compétences visées à chaque étape du proje
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Compétence} & \textbf{Description} \\ \hline
-\textbf{Exploration} & Analyser la qualité et la structure des données (étape actuelle) \\ \hline
+\textbf{Exploration} & Analyser la qualité et la structure des données \\ \hline
 \textbf{Préparation} & Nettoyer, encoder et normaliser les features \\ \hline
-\textbf{Transformation} & Réduire la dimension via l'Analyse en Composantes Principales (ACP) \\ \hline
+\textbf{Transformation} & Réduire la dimension via ACP \\ \hline
 \textbf{Modélisation} & Appliquer le clustering (K-Means), classification et régression \\ \hline
-\textbf{Évaluation} & Interpréter les résultats et proposer des recommandations métiers \\ \hline
-\textbf{Déploiement} & Créer une interface utilisateur interactive avec Flask \\ \hline
+\textbf{Évaluation} & Interpréter les résultats et proposer des recommandations \\ \hline
+\textbf{Déploiement} & Créer une interface utilisateur avec Flask \\ \hline
 \end{tabular}
 \caption{Pipeline du projet de Machine Learning}
 \end{table}
 
+% =============================================================================
+% SECTION 2: DONNÉES (FUSION)
+% =============================================================================
+
 \section{Description du Jeu de Données}
-Le dataset contient des informations sur les clients et leurs transactions.
+
 \begin{itemize}[label=\color{headerblue}$\bullet$]
-    \item \textbf{Nombre de lignes :} 4372
-    \item \textbf{Nombre de colonnes :} 52
-    \item \textbf{Types de données :} Variables numériques (comportementales) et catégorielles (profils).
+    \item \textbf{Nombre de lignes :} 4 372 clients
+    \item \textbf{Nombre de colonnes :} 52 features
+    \item \textbf{Types de données :} 34 numériques, 18 catégorielles
+    \item \textbf{Taille mémoire :} 1,7 MB
 \end{itemize}
 
-\section{Analyse de la Qualité des Données}
+% =============================================================================
+% SECTION 3: EDA (TONNE + COMPLÉMENTS)
+% =============================================================================
+
+\section{Analyse Exploratoire des Données (EDA)}
 
 \subsection{Valeurs Manquantes}
-L'analyse a révélé des lacunes importantes dans certaines variables clés :
-\begin{itemize}
-    \item \textbf{Age :} 1311 valeurs manquantes (nécessite une imputation par médiane ou mode).
-    \item \textbf{AvgDaysBetweenPurchases :} 79 valeurs manquantes.
-\end{itemize}
 
+\begin{tcolorbox}[colframe=warningred, title=Alertes]
+\begin{itemize}
+    \item \textbf{Age :} 1 311 valeurs manquantes (\textbf{30,0\%})
+    \item \textbf{AvgDaysBetweenPurchases :} 79 valeurs manquantes (1,8\%)
+\end{itemize}
+\end{tcolorbox}
 
 \subsection{Anomalies et Valeurs Suspectes}
-Au-delà des valeurs nulles, l'analyse a révélé des codes erreurs ou des valeurs sentinelles (-1, 99, 999) :
+
 \begin{itemize}[label=\color{accentorange}$\triangle$]
-    \item \textbf{Quantités :} 349 valeurs à \textbf{-1} dans la colonne \textit{MinQuantity}.
-    \item \textbf{Scores :} Des valeurs \textbf{-1} et \textbf{99} détectées dans \textit{SatisfactionScore}.
-    \item \textbf{Support :} 87 valeurs à \textbf{999} dans \textit{SupportTicketsCount}.
-    \item \textbf{Profils :} 1 649 clients avec un genre marqué comme \textit{"Unknown"}.
+    \item \textbf{SatisfactionScore :} 115 valeurs \textbf{-1}, 114 valeurs \textbf{99}
+    \item \textbf{SupportTicketsCount :} 43 valeurs \textbf{-1}, 87 valeurs \textbf{999}
+    \item \textbf{Gender :} 1 649 clients \textbf{"Unknown"} (37,7\%)
+    \item \textbf{Quantités négatives :} 349 valeurs \textbf{-1} dans MinQuantity, 15 dans TotalQuantity, 16 dans AvgQuantityPerTransaction
+    \item \textbf{Codes 99 :} Recency (10), MonetaryMax (11), CustomerTenureDays (7), FirstPurchaseDaysAgo (7), UniqueProducts (13), UniqueDescriptions (10), TotalTransactions (11)
 \end{itemize}
 
-\section{Visualisations et Distributions}
-
-\subsection{Histogrammes (Distributions)}
+\subsection{Visualisations}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{histograms.png}
 \caption{Distribution des variables RFM et de l'âge}
-\clearpage
 \end{figure}
-
-\subsection{Boxplots (Détection des Outliers)}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{boxplots.png}
-\caption{Analyse des valeurs aberrantes sur les variables monétaires}
-\clearpage
+\caption{Détection des outliers sur les variables monétaires}
 \end{figure}
-Les graphiques montrent des clients "extrêmes" avec des dépenses dépassant 10 000 unités. Ces outliers devront être traités pour ne pas biaiser le clustering.
 
-\section{Analyse de Corrélation}
-La matrice de corrélation montre des liens forts entre certaines variables (ex: \textit{MonetaryTotal} et \textit{Frequency}).
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{correlations.png}
-\caption{Matrice de corrélation des caractéristiques numériques}
-\clearpage
+\caption{Matrice de corrélation}
 \end{figure}
 
-\subsection{Relation Fréquence vs Montant}
-Le nuage de points ci-dessous montre la relation entre le nombre d'achats et le montant total dépensé. On observe une concentration massive de clients à faible fréquence/faible montant, mais également quelques "outliers" à très forte valeur (plus de 250 000 unités) qui tirent la moyenne vers le haut.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{scatter_rfm.png}
-    \caption{Corrélation entre fréquence d'achat et montant total}
-\end{figure}
-
-\subsection{Distribution des Segments RFM Initiaux}
-L'analyse de la segmentation existante montre que la majorité des clients sont actuellement classés comme "Potentiels" (environ 1600 clients), suivis par les "Fidèles". Les segments "Champions" et "Dormants" sont moins représentés, ce qui justifie notre future modélisation K-Means pour mieux cibler ces groupes.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{rfm_segment.png}
-    \caption{Répartition des clients par segment RFM}
-\end{figure}
-
-\section{Stratégie de Modélisation (Clustering)}
-
-\subsection{Justification de l'approche}
-Bien qu'une colonne \textit{RFMSegment} existe déjà, nous allons appliquer un algorithme de \textbf{K-Means} pour :
+\textbf{Corrélations majeures :}
 \begin{itemize}
-    \item Découvrir des groupes de clients plus précis en intégrant plus de variables (ex: Age, Ancienneté).
-    \item Détecter les clients à haut risque de \textit{Churn} (attrition) cachés dans les segments loyaux.
+    \item Recency $\leftrightarrow$ Churn : $r = 0,86$ (forte)
+    \item Frequency $\leftrightarrow$ MonetaryTotal : $r = 0,57$ (modérée)
 \end{itemize}
 
-\subsection{Variables de Cohorte et Ancienneté}
-Nous avons converti \textit{RegistrationDate} en format date. Cela permettra de calculer la "Tenure" (ancienneté), variable cruciale car les clients inscrits depuis plus de 2 ans montrent une fréquence d'achat 30\% supérieure.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{scatter_rfm.png}
+\caption{Relation Fréquence vs Montant}
+\end{figure}
 
-\section{Synthèse des Problèmes et Prochaines Étapes}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{rfm_segment.png}
+\caption{Distribution des segments RFM}
+\end{figure}
 
-\begin{tcolorbox}[title=Bilan de la Qualité]
-L'étape d'exploration confirme que le dataset est riche (52 colonnes) mais nécessite un nettoyage rigoureux :
+\begin{table}[h]
+\centering
+\begin{tabular}{lccc}
+\toprule
+\textbf{Segment} & \textbf{Effectif} & \textbf{\%} & \textbf{Profil} \\
+\midrule
+Potentiels & 1 589 & 36,3\% & À activer \\
+Fidèles & 1 177 & 26,9\% & Cœur de cible \\
+Champions & 979 & 22,4\% & VIP \\
+Dormants & 627 & 14,3\% & Risque départ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% =============================================================================
+% SECTION 4: PREPROCESSING (AJOUT IMPORTANT)
+% =============================================================================
+
+\section{Préparation des Données (Préprocessing)}
+
+\subsection{Étape 1 : Parsing des Dates (Guide \S 7)}
+
+\textbf{Problème :} Formats inconsistants (\texttt{17/07/10}, \texttt{2010-10-04}, \texttt{12/09/2009})
+
+\textbf{Méthode :} \texttt{pd.to\_datetime(dayfirst=True, errors='coerce')}
+
+\textbf{Résultat :} 4 nouvelles features : RegYear, RegMonth, RegDay, RegWeekday
+
+\subsection{Étape 2 : Imputation des Valeurs Manquantes (Guide \S 6)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llc}
+\toprule
+\textbf{Feature} & \textbf{Méthode} & \textbf{Valeur} \\
+\midrule
+Age (30\% manquants) & Médiane & 49,0 ans \\
+AvgDaysBetweenPurchases & Médiane & 25,4 jours \\
+SupportTicketsCount (-1, 999) & Médiane après nettoyage & 2,0 \\
+SatisfactionScore (-1, 99) & Médiane après nettoyage & 3,0 \\
+Gender (Unknown) & Mode & M \\
+Codes 99 (7 colonnes) & Médiane & par colonne \\
+Valeurs négatives (-1) & Médiane positive & par colonne \\
+\bottomrule
+\end{tabular}
+\caption{Imputation des valeurs manquantes et aberrantes}
+\end{table}
+
+\subsection{Étape 3 : Suppression des Features Inutiles (Guide \S 5)}
+
 \begin{itemize}
-    \item Suppression du \textit{CustomerID} (inutile pour le modèle).
-    \item Traitement des valeurs -1 et 999.
-    \item Transformation logarithmique des variables monétaires très asymétriques.
+    \item \textbf{NewsletterSubscribed} : Supprimée (constante "Yes")
+    \item \textbf{CustomerID} : Supprimée (identifiant non prédictif)
+\end{itemize}
+
+\subsection{Étape 4 : Extraction LastLoginIP (Guide \S 5 + \S 7)}
+
+\textbf{Méthode :} Extraction du premier octet de l'IP
+
+\textbf{Exemple :} "192.168.1.45" $\rightarrow$ "192" (feature IP\_Prefix)
+
+\subsection{Étape 5 : Multicolinéarité (Guide \S 2)}
+
+\textbf{Méthode :} Matrice de corrélation avec seuil $|r| > 0,8$
+
+\textbf{Vérification :} MonetaryTotal vs MonetaryAvg : $r = 0,73$
+
+\textbf{Décision :} Conservation des deux variables (corrélation $< 0,8$)
+
+\subsection{Étape 6 : Feature Engineering (Guide \S 4)}
+
+3 nouvelles features créées :
+
+$$MonetaryPerDay = \frac{MonetaryTotal}{Recency + 1}$$
+
+$$AvgBasketValue = \frac{MonetaryTotal}{Frequency}$$
+
+$$TenureRatio = \frac{Recency}{CustomerTenureDays + 1}$$
+
+\subsection{Étape 7 : Standardisation (Guide \S 1)}
+
+\textbf{Méthode :} StandardScaler (centrage-réduction)
+
+\textbf{Formule :} $Z = \frac{X - \mu}{\sigma}$
+
+\textbf{Anti Data Leakage :} Fit uniquement sur train, transform sur test
+
+\begin{itemize}
+    \item Features standardisées : 48 colonnes
+    \item Features binaires conservées : 6 colonnes
+    \item Cible préservée : Churn (pas de standardisation)
+\end{itemize}
+
+\subsection{Récapitulatif des Transformations}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lccl}
+\toprule
+\textbf{Étape} & \textbf{Entrée} & \textbf{Sortie} & \textbf{Guide} \\
+\midrule
+Chargement & - & 52 cols & - \\
+Parsing dates & 52 & 54 cols & \S 7 \\
+Imputation & 54 & 54 cols & \S 6 \\
+Suppression & 54 & 52 cols & \S 5 \\
+Extraction IP & 52 & 52 cols & \S 5+\S 7 \\
+Multicolinéarité & 52 & 52 cols & \S 2 \\
+Feature Eng. & 52 & 55 cols & \S 4 \\
+Standardisation & 55 & 55 cols & \S 1 \\
+\bottomrule
+\end{tabular}
+\caption{Évolution des dimensions du dataset}
+\end{table}
+
+\subsection{Vérification du Déséquilibre}
+
+\begin{itemize}
+    \item \textbf{Churn} : 67,2\% fidèles / 32,8\% partis (modéré)
+    \item \textbf{AccountStatus} : 93,8\% Active (quasi-constante)
+\end{itemize}
+
+% =============================================================================
+% SECTION 5: CONCLUSION
+% =============================================================================
+
+\section{Conclusion et Perspectives}
+
+\begin{tcolorbox}[title=Bilan]
+L'étape d'exploration et de préparation est terminée. Les données sont maintenant :
+\begin{itemize}
+    \item Nettoyées (valeurs manquantes et aberrantes traitées)
+    \item Enrichies (3 nouvelles features métier)
+    \item Standardisées (même échelle pour toutes les variables)
 \end{itemize}
 \end{tcolorbox}
 
-\textbf{Étape suivante :} Préparation des données (Nettoyage, Encodage des catégories et Scaling).
+\textbf{Prochaine étape :} Clustering avec K-Means pour identifier les segments clients actionnables.
 
 \end{document}
-
