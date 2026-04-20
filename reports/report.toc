@@ -1,19 +1,26 @@
 \babel@toc {french}{}\relax 
-\contentsline {section}{\numberline {1}Introduction et Objectifs du Projet}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Objectifs Pédagogiques}{2}{subsection.1.1}%
-\contentsline {section}{\numberline {2}Description du Jeu de Données}{2}{section.2}%
-\contentsline {section}{\numberline {3}Analyse Exploratoire des Données (EDA)}{2}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Valeurs Manquantes}{2}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Anomalies et Valeurs Suspectes}{2}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Visualisations}{3}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Préparation des Données (Préprocessing)}{5}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Étape 1 : Parsing des Dates (Guide \S 7)}{5}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Étape 2 : Imputation des Valeurs Manquantes (Guide \S 6)}{5}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Étape 3 : Suppression des Features Inutiles (Guide \S 5)}{5}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Étape 4 : Extraction LastLoginIP (Guide \S 5 + \S 7)}{6}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Étape 5 : Multicolinéarité (Guide \S 2)}{6}{subsection.4.5}%
-\contentsline {subsection}{\numberline {4.6}Étape 6 : Feature Engineering (Guide \S 4)}{6}{subsection.4.6}%
-\contentsline {subsection}{\numberline {4.7}Étape 7 : Standardisation (Guide \S 1)}{6}{subsection.4.7}%
-\contentsline {subsection}{\numberline {4.8}Récapitulatif des Transformations}{6}{subsection.4.8}%
-\contentsline {subsection}{\numberline {4.9}Vérification du Déséquilibre}{6}{subsection.4.9}%
-\contentsline {section}{\numberline {5}Conclusion et Perspectives}{7}{section.5}%
+\contentsline {section}{\numberline {1}Introduction et Architecture du Projet}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Stack Technique}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Jeu de Données et Variables Cibles}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Problématiques de Qualité Identifiées}{2}{subsection.2.1}%
+\contentsline {section}{\numberline {3}Prétraitement : Chaîne de Transformation}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Stratégie Anti Data Leakage}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Feature Engineering}{2}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Encodage des Variables Catégorielles}{3}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Détection d'Outliers : IsolationForest}{3}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Suppression des Features Constantes}{3}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Imputation : KNNImputer}{3}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Multicolinéarité : Variance Inflation Factor (VIF)}{3}{subsection.3.7}%
+\contentsline {subsection}{\numberline {3.8}Réduction de Dimension : Analyse en Composantes Principales (PCA)}{3}{subsection.3.8}%
+\contentsline {section}{\numberline {4}Modélisation Avancée}{4}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Classification : Chaîne SMOTE + GridSearchCV}{4}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Modèles Entraînés et Comparaison}{4}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Analyse des Performances : XGBoost (Meilleur Modèle)}{5}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Régression : Prédiction de MonetaryTotal}{6}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Clustering : Segmentation par K-Means}{7}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Évaluation Finale sur Données de Test}{8}{section.5}%
+\contentsline {section}{\numberline {6}Déploiement : Application Streamlit}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Pourquoi Streamlit ?}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Architecture de l'Application}{9}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Fonctionnalités Implémentées}{9}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Conclusion}{9}{section.7}%

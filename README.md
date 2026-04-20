@@ -1,283 +1,183 @@
-Titre
+# 🛍️ Retail Churn Predictor — Analyse Comportementale Clientèle
 
-Analyse du Comportement des Clients - Projet Machine Learning
+> Atelier Machine Learning · Module GI2 · Année universitaire 2025-2026  
+> Préparé par Fadoua Drira
 
-Description du projet
+Chaîne complète de traitement ML appliquée à un dataset e-commerce de cadeaux :  
+**Exploration → Préparation → Modélisation → Évaluation → Déploiement**
 
-Ce projet, Analyse du Comportement des Clients - Projet Machine Learning Retail, vise à analyser le comportement des clients d’une entreprise e-commerce spécialisée dans les cadeaux en utilisant des techniques de Machine Learning.
+---
 
-L’entreprise souhaite :
+## 📁 Structure du projet
 
-Comprendre le comportement des clients
-
-Améliorer les stratégies marketing
-
-Réduire le taux de départ des clients (churn)
-
-Augmenter le chiffre d’affaires
-
-Le dataset contient 52 variables (features) issues de transactions réelles de clients. Il est intentionnellement imparfait, avec des valeurs manquantes, du bruit et des données non nettoyées. Cela permet de travailler dans un contexte réaliste d’analyse de données, de prétraitement et de Machine Learning.
-
-Structure du projet
-
-Le projet est organisé comme suit :
-
+```
 projet_ml_retail/
-│-- data/
-│   │-- raw/
-│   │-- processed/
-│   └-- train_test/
-│-- notebooks/
-│-- src/
-│   │-- preprocessing.py
-│   │-- train_model.py
-│   │-- predict.py
-│   └-- utils.py
-│-- models/
-│-- app/
-│-- reports/
-│-- requirements.txt
-│-- README.md
-└-- .gitignore
-Description des dossiers et fichiers
+├── data/
+│   ├── raw/                    # Données brutes originales (.csv)
+│   ├── processed/              # Données nettoyées (cleaned_data.csv)
+│   └── train_test/             # Splits train/test + échantillon brut
+├── notebooks/                  # Notebooks Jupyter (prototypage / EDA)
+├── src/
+│   ├── preprocessing.py        # Pipeline de prétraitement complet
+│   ├── train_model.py          # Entraînement des modèles (4 classifieurs)
+│   ├── predict.py              # Prédiction sur nouvelles données
+│   └── utils.py                # Fonctions utilitaires (plots, save…)
+├── models/                     # Artefacts sauvegardés
+│   ├── imputer.joblib
+│   ├── scaler.joblib
+│   ├── pca.joblib
+│   ├── churn_classifier.pkl    # Meilleur modèle de classification
+│   ├── monetary_regressor.pkl  # RandomForest régresseur
+│   └── customer_clusters.pkl  # KMeans (4 segments)
+├── app/
+│   └── app.py                  # Application web Flask
+├── reports/
+│   ├── confusion_matrix.png
+│   ├── roc_curve.png
+│   ├── model_comparison.csv
+│   └── predictions.csv
+├── requirements.txt
+├── README.md
+└── .gitignore
+```
 
-data/
+---
 
-data/raw/ : contient les fichiers de données brutes (par exemple CSV) avec les 52 variables décrivant les clients et leurs transactions.
+## ⚙️ Installation
 
-data/processed/ : contient les données nettoyées et transformées après le prétraitement.
+### 1. Cloner le dépôt
 
-data/train_test/ : contient les données séparées en ensembles d’entraînement et de test pour la modélisation.
-
-notebooks/
-Contient les notebooks Jupyter utilisés pour :
-
-L’analyse exploratoire des données (EDA)
-
-Les tests de prétraitement
-
-Les expérimentations avec les modèles et les visualisations
-
-src/
-Contient le code Python du projet :
-
-preprocessing.py : scripts pour nettoyer les données, gérer les valeurs manquantes, encoder les variables catégorielles et normaliser les données.
-
-train_model.py : scripts pour entraîner les modèles de Machine Learning (clustering, classification, régression).
-
-predict.py : scripts pour générer des prédictions avec les modèles entraînés.
-
-utils.py : fonctions utilitaires (chargement des données, sauvegarde des modèles, visualisations, etc.).
-
-models/
-Contient les modèles entraînés (fichiers .pkl ou .joblib).
-
-app/
-Contient le code pour le déploiement, notamment une future application Flask permettant d’utiliser les modèles via une interface web ou API.
-
-reports/
-Contient les rapports, graphiques et visualisations (EDA, performances des modèles, etc.).
-
-requirements.txt
-Liste toutes les dépendances Python nécessaires au projet.
-
-README.md
-Fichier de documentation principal du projet (ce fichier).
-
-.gitignore
-Liste les fichiers ignorés par Git (environnement virtuel, fichiers temporaires, etc.).
-
-Installation
-
-Cloner le dépôt (ou copier le projet localement) :
-
-git clone <url-du-repository>.git
+```bash
+git clone https://github.com/<votre-username>/projet_ml_retail.git
 cd projet_ml_retail
+```
 
-Créer un environnement virtuel :
+### 2. Créer et activer l'environnement virtuel
 
+```bash
+# Windows
 python -m venv venv
-
-Activer l’environnement virtuel (Windows) :
-
 venv\Scripts\activate
 
-(Sur Linux/Mac :)
-
+# macOS / Linux
+python3 -m venv venv
 source venv/bin/activate
+```
 
-Installer les dépendances :
+### 3. Installer les dépendances
 
-pip install --upgrade pip
+```bash
 pip install -r requirements.txt
-Dépendances
+```
 
-Les dépendances du projet sont gérées avec requirements.txt.
+---
 
-Pour générer ou mettre à jour ce fichier :
+## 🚀 Guide d'utilisation
 
-pip freeze > requirements.txt
+### Étape 1 — Prétraitement
 
-Cela permet de reproduire exactement le même environnement sur une autre machine.
-
-Dataset
-
-Le dataset est stocké dans :
-
-data/raw/
-
-Il contient des informations sur les clients d’une entreprise e-commerce, notamment :
-
-Données démographiques (âge, genre, région)
-
-Données transactionnelles (montant d’achat, fréquence, récence)
-
-Données comportementales (type de client, fidélité, interactions)
-
-Le dataset contient 52 variables et est intentionnellement imparfait, avec :
-
-Valeurs manquantes
-
-Données aberrantes (outliers)
-
-Données non nettoyées
-
-Cela permet de travailler sur :
-
-L’analyse exploratoire des données
-
-Le nettoyage des données
-
-Le Machine Learning
-
-Étapes du projet
-
-Le projet est structuré en plusieurs étapes.
-
-1 - Analyse exploratoire des données (EDA)
-
-Objectifs :
-
-Comprendre la structure du dataset
-
-Vérifier les valeurs manquantes
-
-Vérifier les types de données
-
-Calculer des statistiques descriptives
-
-Créer des visualisations comme :
-
-Histogrammes
-
-Boxplots
-
-Matrices de corrélation
-
-Distributions des variables
-
-Cette étape permet d’identifier les problèmes dans les données et les premières tendances.
-
-2 - Prétraitement des données
-
-Objectifs :
-
-Gestion des valeurs manquantes
-
-Remplacement ou suppression des valeurs manquantes
-
-Encodage des variables catégorielles
-
-Transformation des variables texte en valeurs numériques
-
-Normalisation des données
-
-Mise à l’échelle des variables numériques
-
-3 - Réduction de dimension
-
-Objectifs :
-
-Appliquer l’ACP (PCA)
-
-Réduire le nombre de variables
-
-Visualiser les clusters
-
-Améliorer les performances des modèles
-
-4 - Modélisation
-
-Objectifs :
-
-Clustering
-
-Regrouper les clients en segments
-
-Exemples d’algorithmes :
-
-K-Means
-
-Clustering hiérarchique
-
-Classification
-
-Prédire des catégories (ex : churn)
-
-Régression
-
-Prédire des valeurs numériques (ex : revenu futur)
-
-5 - Évaluation
-
-Objectifs :
-
-Évaluer les performances des modèles
-
-Exemples de métriques :
-
-Classification :
-
-Accuracy
-
-Precision
-
-Recall
-
-Régression :
-
-RMSE
-
-MAE
-
-R²
-
-Clustering :
-
-Silhouette Score
-
-6 - Déploiement
-
-Objectifs :
-
-Créer une application Flask permettant :
-
-D’envoyer des données clients
-
-D’obtenir des prédictions
-
-De visualiser les résultats
-
-Utilisation
-
-Après installation :
-
-Prétraitement
+```bash
 python src/preprocessing.py
-Entraînement
+```
+
+Ce script :
+- Charge `data/raw/retail_customers_COMPLETE_CATEGORICAL.csv`
+- Effectue le feature engineering (IP, dates, ratios)
+- Encode les variables catégorielles (One-Hot + Ordinal + Target Encoding)
+- Supprime les outliers via IsolationForest (contamination=6%)
+- Applique KNNImputer → StandardScaler → PCA (10 composantes)
+- Sauvegarde les artefacts dans `models/` et les splits dans `data/train_test/`
+
+### Étape 2 — Entraînement
+
+```bash
 python src/train_model.py
-Prédiction
+```
+
+Ce script :
+- Compare 4 modèles : Decision Tree, KNN, Random Forest, XGBoost
+- Utilise SMOTE pour rééquilibrer les classes
+- Optimise les hyperparamètres via GridSearchCV (cv=5, scoring=F1)
+- Sauvegarde le meilleur classifieur, un régresseur MonetaryTotal et un KMeans
+- Génère la matrice de confusion et la courbe ROC dans `reports/`
+
+### Étape 3 — Prédiction batch
+
+```bash
 python src/predict.py
+```
 
+Applique le pipeline complet sur `data/train_test/X_test_brut_40.csv` et sauvegarde les résultats dans `reports/predictions.csv`.
 
-Projet Machine Learning - Islem Kaddoussi GI2-S3
+### Étape 4 — Interface web Flask
+
+```bash
+python app/app.py
+```
+
+Ouvrir [http://127.0.0.1:5000](http://127.0.0.1:5000) dans votre navigateur.
+
+| Route | Description |
+|-------|-------------|
+| `GET /` | Formulaire de saisie manuelle d'un client |
+| `POST /predict` | Prédiction (HTML ou JSON selon Content-Type) |
+| `GET /batch` | Prédiction sur les 40 clients de test |
+| `GET /health` | Vérification que les modèles sont chargés |
+
+**Appel API (JSON) :**
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"Recency": 45, "Frequency": 3, "MonetaryAvg": 60, "Age": 28}'
+```
+
+---
+
+## 🧠 Modèles & Résultats
+
+| Modèle | Accuracy | Precision | Recall | F1 | ROC-AUC |
+|--------|----------|-----------|--------|----|---------|
+| Decision Tree | — | — | — | — | — |
+| KNN | — | — | — | — | — |
+| **Random Forest** | — | — | — | — | — |
+| XGBoost | — | — | — | — | — |
+
+> Les valeurs seront complétées après exécution de `train_model.py` et reportées dans `reports/model_comparison.csv`.
+
+### Pipeline de prétraitement
+
+```
+Données brutes (52 features)
+    ↓  Feature Engineering (IP, dates, ratios)
+    ↓  One-Hot + Ordinal + Target Encoding
+    ↓  IsolationForest (suppression outliers 6%)
+    ↓  Train / Test split (80/20, stratifié)
+    ↓  KNNImputer (k=5)
+    ↓  StandardScaler
+    ↓  PCA (10 composantes)
+    ↓  SMOTE (rééquilibrage)
+    ↓  GridSearchCV (5 folds)
+```
+
+---
+
+## 📦 Dépendances principales
+
+| Package | Usage |
+|---------|-------|
+| `pandas`, `numpy` | Manipulation des données |
+| `scikit-learn` | Preprocessing, modèles, évaluation |
+| `xgboost` | Classifieur gradient boosting |
+| `imbalanced-learn` | SMOTE |
+| `flask` | Interface web |
+| `joblib` | Sérialisation des modèles |
+| `matplotlib`, `seaborn` | Visualisations |
+
+---
+
+## 👤 Auteur
+
+**Atelier ML — GI2**  
+Encadrant : Fadoua Drira  
+Année : 2025-2026

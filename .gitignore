@@ -1,2 +1,28 @@
+# Environnements virtuels
 .venv/
-data/raw/*.csv
+venv/
+env/
+
+# Fichiers compilés Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Données (On ignore les gros fichiers mais on peut garder les dossiers)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Modèles volumineux
+models/*.pkl
+models/*.joblib
+
+# Fichiers générés
+reports/*.png
+reports/*.csv
+!reports/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

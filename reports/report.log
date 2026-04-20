@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  23 FEB 2026 06:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.21)  20 APR 2026 00:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -776,14 +776,19 @@ Package hyperref Info: Link coloring OFF on input line 53.
 \openout4 = `report.out'.
 
 \c@lstlisting=\count354
-LaTeX Font Info:    Trying to load font information for U+msa on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 69.
  (C:\Users\Islam\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 75.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 69.
  (C:\Users\Islam\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
+)
+Overfull \hbox (30.45251pt too wide) in paragraph at lines 75--78
+ [][] 
+ []
+
+[1
 
 {C:/Users/Islam/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (report.toc)
 \tf@toc=\write5
@@ -801,13 +806,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.90 \newpage
+l.82 \newpage
               [1]
-<histograms.png, id=114, 860.013pt x 569.9694pt>
-File: histograms.png Graphic file (type png)
-<use histograms.png>
-Package pdftex.def Info: histograms.png  used on input line 161.
-(pdftex.def)             Requested size: 386.95897pt x 256.45776pt.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 109.
+ (C:\Users\Islam\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+Overfull \hbox (55.397pt too wide) detected at line 136
+[] \OT1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 ;  [] \OT1/cmr/m/n/10.95 = []\OML/cmm/m/it/10.95 ;  [] \OT1/cmr/m/n/10.95 = []
+ []
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -816,23 +823,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[2
-pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.164 
-      ]
-<boxplots.png, id=122, 1077.0639pt x 353.1594pt>
-File: boxplots.png Graphic file (type png)
-<use boxplots.png>
-Package pdftex.def Info: boxplots.png  used on input line 167.
-(pdftex.def)             Requested size: 386.95897pt x 126.87862pt.
-<correlations.png, id=123, 680.0607pt x 569.9694pt>
-File: correlations.png Graphic file (type png)
-<use correlations.png>
-Package pdftex.def Info: correlations.png  used on input line 173.
-(pdftex.def)             Requested size: 386.95897pt x 324.32933pt.
-
+[2]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -840,27 +831,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[3
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.176 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.176 
-       <./histograms.png> <./boxplots.png>]
-<scatter_rfm.png, id=132, 521.7894pt x 395.076pt>
-File: scatter_rfm.png Graphic file (type png)
-<use scatter_rfm.png>
-Package pdftex.def Info: scatter_rfm.png  used on input line 185.
-(pdftex.def)             Requested size: 338.58632pt x 256.3623pt.
-<rfm_segment.png, id=133, 715.473pt x 352.9185pt>
-File: rfm_segment.png Graphic file (type png)
-<use rfm_segment.png>
-Package pdftex.def Info: rfm_segment.png  used on input line 191.
-(pdftex.def)             Requested size: 338.58632pt x 167.01335pt.
+[3]
+<metrics_comparison.png, id=164, 867.24pt x 433.62pt>
+File: metrics_comparison.png Graphic file (type png)
+<use metrics_comparison.png>
+Package pdftex.def Info: metrics_comparison.png  used on input line 239.
+(pdftex.def)             Requested size: 435.32422pt x 217.663pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -870,20 +846,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.194 
-      
-pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.194 
-       <./correlations.png> <./scatter_rfm.png>]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 217.
- (C:\Users\Islam\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
+l.242 
+      ]
+<cm_XGBoost.png, id=174, 433.62pt x 361.35pt>
+File: cm_XGBoost.png Graphic file (type png)
+<use cm_XGBoost.png>
+Package pdftex.def Info: cm_XGBoost.png  used on input line 249.
+(pdftex.def)             Requested size: 217.66211pt x 181.38583pt.
+<roc_XGBoost.png, id=175, 433.62pt x 361.35pt>
+File: roc_XGBoost.png Graphic file (type png)
+<use roc_XGBoost.png>
+Package pdftex.def Info: roc_XGBoost.png  used on input line 250.
+(pdftex.def)             Requested size: 217.66211pt x 181.38583pt.
+<roc_all_models.png, id=176, 578.16pt x 433.62pt>
+File: roc_all_models.png Graphic file (type png)
+<use roc_all_models.png>
+Package pdftex.def Info: roc_all_models.png  used on input line 256.
+(pdftex.def)             Requested size: 386.95897pt x 290.21953pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -892,16 +875,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [5
-pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.256 ...tape 5 : MulticolinÃ©aritÃ© (Guide \S 2)}
-                                                  
-pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+l.259 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.256 ...tape 5 : MulticolinÃ©aritÃ© (Guide \S 2)}
-                                                   <./rfm_segment.png>]
+l.259 
+       <./metrics_comparison.png> <./cm_XGBoost.png> <./roc_XGBoost.png>]
+<regression_scatter.png, id=186, 505.89pt x 433.62pt>
+File: regression_scatter.png Graphic file (type png)
+<use regression_scatter.png>
+Package pdftex.def Info: regression_scatter.png  used on input line 279.
+(pdftex.def)             Requested size: 338.58632pt x 290.21953pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -910,11 +899,27 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6
-pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.330 
-      ]
+l.282 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.282 
+       <./roc_all_models.png>]
+<elbow_curve.png, id=195, 578.16pt x 361.35pt>
+File: elbow_curve.png Graphic file (type png)
+<use elbow_curve.png>
+Package pdftex.def Info: elbow_curve.png  used on input line 289.
+(pdftex.def)             Requested size: 338.58632pt x 211.6122pt.
+<clusters_2d.png, id=196, 578.16pt x 433.62pt>
+File: clusters_2d.png Graphic file (type png)
+<use clusters_2d.png>
+Package pdftex.def Info: clusters_2d.png  used on input line 297.
+(pdftex.def)             Requested size: 338.58632pt x 253.93465pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -922,26 +927,66 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[7] (report.aux)
+[7
+pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.300 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.300 
+       <./regression_scatter.png> <./elbow_curve.png>]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8
+pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.340 \subsection{Architecture de l'Application}
+                                                
+pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.340 \subsection{Architecture de l'Application}
+                                                 <./clusters_2d.png>]
+Overfull \hbox (24.30203pt too wide) in paragraph at lines 342--343
+[]\T1/cmr/m/n/10.95 L'application lit di-rec-te-ment les don-nées de test déjà pré-trai-tées (\T1/cmtt/m/n/10.95 X_test_pca.csv\T1/cmr/m/n/10.95 , \T1/cmtt/m/n/10.95 X_test_scaled.csv\T1/cmr/m/n/10.95 ). 
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9] (report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: A4D47D936A7361C96BBE16DBB5A75B39;4414.
+(rerunfilecheck)             Checksum: AC72708B8D235F18D46518AE24FDA135;5890.
  ) 
 Here is how much of TeX's memory you used:
- 27593 strings out of 474486
- 521019 string characters out of 5743755
- 1940542 words of memory out of 5000000
- 49409 multiletter control sequences out of 15000+600000
- 574349 words of font info for 74 fonts, out of 8000000 for 9000
+ 27656 strings out of 474486
+ 522112 string characters out of 5743755
+ 1944542 words of memory out of 5000000
+ 49454 multiletter control sequences out of 15000+600000
+ 577554 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,11n,87p,453b,569s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on report.pdf (8 pages, 974110 bytes).
+ 84i,12n,87p,505b,574s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecti1440.pk> <C:\Users\Islam\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Islam/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on report.pdf (10 pages, 493351 bytes).
 PDF statistics:
- 586 PDF objects out of 1000 (max. 8388607)
- 34 named destinations out of 1000 (max. 500000)
- 182 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 692 PDF objects out of 1000 (max. 8388607)
+ 46 named destinations out of 1000 (max. 500000)
+ 248 words of extra memory for PDF output out of 10000 (max. 10000000)
 

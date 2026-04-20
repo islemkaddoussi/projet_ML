@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retail Intelligence : Pipeline Machine Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. THE SETUP */
+        * { box-sizing: border-box; }
+        p { margin: 0; margin-bottom: 15px; }
+        body {
+            background-color: #e2e8f0;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: 1fr;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+            place-items: center;
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Lato', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px 60px;
+            position: relative;
+            width: 1280px;
+            border-top: 8px solid #2563eb;
+        }
+
+        .slide-container::before {
+            content: ''; height: 100%; left: 0; position: absolute; top: 0; width: 100%; z-index: 0;
+            background: radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05) 0%, transparent 40%);
+        }
+
+        .slide-container > * { position: relative; z-index: 1; }
+
+        /* 2. TYPOGRAPHY */
+        .slide-container h1, .slide-container h2, .slide-container h3, .slide-container h4 {
+            color: #0f172a; font-weight: 700; font-family: 'Poppins', sans-serif; margin: 0;
+        }
+        .slide-container p, .slide-container li, .slide-container .subtitle {
+            color: #475569; font-family: 'Lato', sans-serif;
+        }
+
+        .slide-container h1 { font-size: 65px; line-height: 1.2; text-align: center; }
+        .slide-container h1 span { color: #2563eb; }
+        
+        .slide-container .slide-title {
+            font-size: 42px; font-weight: 600; margin-bottom: 30px; text-align: left; width: 100%;
+            border-left: 6px solid #2563eb; padding-left: 20px;
+        }
+        
+        .slide-container h3 { font-size: 26px; font-weight: 600; margin-bottom: 15px; color: #1e293b; }
+        .slide-container p, .slide-container li { font-size: 20px; line-height: 1.6; }
+        .slide-container .subtitle { font-size: 24px; font-weight: 400; margin: 20px auto; color: #334155; text-align: center; }
+
+        .content-area {
+            align-items: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: center; width: 100%;
+        }
+
+        /* 3. LAYOUTS */
+        .two-column {
+            align-items: flex-start; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
+        }
+        .three-column {
+            align-items: stretch; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; width: 100%;
+        }
+
+        .card {
+            background-color: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;
+            padding: 30px; text-align: left; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            display: flex; flex-direction: column;
+        }
+        
+        ul.custom-list { list-style: none; padding: 0; margin: 0; }
+        ul.custom-list li { position: relative; padding-left: 30px; margin-bottom: 15px; }
+        ul.custom-list li::before {
+            content: '\f0da'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+            position: absolute; left: 0; color: #2563eb;
+        }
+
+        /* IMAGES */
+        .image-wrapper {
+            background-color: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0;
+            height: 420px; max-width: 100%; overflow: hidden; width: 100%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; padding: 10px;
+        }
+        .image-wrapper img { height: 100%; max-width: 100%; object-fit: contain; width: 100%; }
+        
+        .multi-image-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px; height: 420px;
+        }
+        .multi-image-grid .image-wrapper { height: 100%; padding: 5px; }
+
+        /* PLAN / TIMELINE */
+        .plan-list { width: 100%; max-width: 900px; }
+        .plan-item {
+            background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 10px;
+            margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02); transition: transform 0.2s;
+        }
+        .plan-item:hover { transform: translateX(10px); border-color: #2563eb; }
+        .plan-item .number {
+            background: #2563eb; color: #fff; font-size: 28px; font-weight: bold; font-family: 'Poppins';
+            height: 60px; width: 60px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+        }
+
+        /* QA & CONCLUSION */
+        .conclusion-box { background: #eff6ff; border-left: 6px solid #2563eb; padding: 30px; border-radius: 0 12px 12px 0; margin-bottom: 20px;}
+        .demo-screen { border: 4px solid #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Titre -->
+<div class="slide-container" id="slide1">
+    <div class="content-area">
+        <h1>Retail Intelligence<br><span>Pipeline Machine Learning</span></h1>
+        <p class="subtitle">Analyse Comportementale Clientèle : Churn, Régression et Clustering</p>
+        <div style="margin-top: 50px; text-align: center; color: #64748b; font-size: 20px;">
+            <p><strong>Présenté par :</strong> Islem Kaddoussi</p>
+            <p>Année Universitaire 2025-2026</p>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 2: Plan de la présentation -->
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">Plan de la Présentation</h2>
+    <div class="content-area">
+        <div class="plan-list">
+            <div class="plan-item">
+                <div class="number">1</div>
+                <div>
+                    <h3>Problématique Métier</h3>
+                    <p>Enjeux du projet : Attrition (Churn), Valeur Client, et Segmentation.</p>
+                </div>
+            </div>
+            <div class="plan-item">
+                <div class="number">2</div>
+                <div>
+                    <h3>Prétraitement & Data Engineering</h3>
+                    <p>Nettoyage rigoureux, gestion du Data Leakage et réduction de dimension.</p>
+                </div>
+            </div>
+            <div class="plan-item">
+                <div class="number">3</div>
+                <div>
+                    <h3>Modélisation & Évaluation</h3>
+                    <p>Comparaison des algorithmes (Classification, Régression, Clustering).</p>
+                </div>
+            </div>
+            <div class="plan-item">
+                <div class="number">4</div>
+                <div>
+                    <h3>Déploiement en Démonstration</h3>
+                    <p>Vidéo de l'application interactive Streamlit en action.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 3: Problématique -->
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">1. Problématique Métier</h2>
+    <div class="content-area">
+        <div class="three-column">
+            <div class="card" style="text-align: center; padding-top: 50px;">
+                <i class="fa-solid fa-user-xmark" style="font-size: 60px; color: #ef4444; margin-bottom: 25px;"></i>
+                <h3>L'Attrition (Churn)</h3>
+                <p>Comment identifier avec précision les clients sur le point de quitter la plateforme avant qu'il ne soit trop tard ?</p>
+            </div>
+            <div class="card" style="text-align: center; padding-top: 50px;">
+                <i class="fa-solid fa-sack-dollar" style="font-size: 60px; color: #10b981; margin-bottom: 25px;"></i>
+                <h3>Prédiction de Valeur</h3>
+                <p>Comment estimer le potentiel financier futur d'un client (Customer Lifetime Value) pour optimiser les budgets ?</p>
+            </div>
+            <div class="card" style="text-align: center; padding-top: 50px;">
+                <i class="fa-solid fa-users-viewfinder" style="font-size: 60px; color: #2563eb; margin-bottom: 25px;"></i>
+                <h3>Segmentation</h3>
+                <p>Comment regrouper les clients de manière mathématique et homogène pour personnaliser les actions marketing ?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 4: Preprocessing (Avant Split) -->
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">2. Prétraitement : Phase 1 </h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="card">
+                <h3><i class="fa-solid fa-broom" style="color: #2563eb;"></i> Nettoyage & Parsing</h3>
+                <ul class="custom-list">
+                    <li><strong>Filtrage métier :</strong> Suppression des anomalies impossibles (ex: âge hors de [18, 81]).</li>
+                    <li><strong>Dates :</strong> Parsing de <code>RegistrationDate</code> en Année, Mois, Jour.</li>
+                    <li><strong>Variables constantes :</strong> Suppression automatique des colonnes sans variance (ex: <code>Newsletter</code>).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fa-solid fa-wrench" style="color: #2563eb;"></i> Feature Engineering</h3>
+                <ul class="custom-list">
+                    <li>Création de nouvelles variables expertes plus représentatives :
+                        <ul>
+                            <li><code>MonetaryPerDay</code> (Dépense par jour)</li>
+                            <li><code>AvgBasketValue</code> (Panier moyen)</li>
+                            <li><code>TenureRatio</code> (Récence relative à l'ancienneté)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Encodage :</strong> Application du <em>One-Hot Encoding</em> pour les catégories nominales et mapping <em>Ordinal</em> pour les niveaux.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 5: Preprocessing (Après Split) -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">2. Prétraitement : Phase 2 </h2>
+    <div class="content-area">
+        <p style="width: 100%; text-align: left; font-weight: bold; color: #ef4444; margin-bottom: 30px;">
+            <i class="fa-solid fa-shield-halved"></i> Prévention du Data Leakage : Ces opérations sont "fit" UNIQUEMENT sur le set d'entraînement (Train).
+        </p>
+        <div class="three-column">
+            <div class="card">
+                <h3>Outliers & VIF</h3>
+                <ul class="custom-list">
+                    <li><strong>Isolation Forest :</strong> Détection et suppression de 6% d'anomalies sur le Train.</li>
+                    <li><strong>Facteur d'Inflation de la Variance (VIF) :</strong> Suppression de 18 variables où VIF > 10 pour casser la Multicolinéarité.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Imputation (KNN)</h3>
+                <ul class="custom-list">
+                    <li>Remplacement des valeurs <code>NaN</code> par la distance spatiale des 5 plus proches voisins (KNN Imputer).</li>
+                    <li>Beaucoup plus précis que le remplacement par la moyenne.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Scaling & PCA</h3>
+                <ul class="custom-list">
+                    <li><strong>StandardScaler :</strong> Centrage et réduction des données.</li>
+                    <li><strong>PCA (10 comp.) :</strong> Évite la malédiction de la dimensionnalité tout en conservant ~77% de la variance.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 6: Benchmark Classification -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">3. Modélisation : Classification (Churn)</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="card" style="justify-content: center;">
+                <h3>Compétition d'Algorithmes</h3>
+                <p>Afin de trouver le meilleur modèle pour prédire le Churn, 4 algorithmes ont été optimisés via <code>GridSearchCV</code> et rééquilibrés avec <code>SMOTE</code>.</p>
+                <ul class="custom-list" style="margin-top: 20px;">
+                    <li><strong>Decision Tree</strong> : Trop simpliste.</li>
+                    <li><strong>KNN</strong> : Sensible au bruit.</li>
+                    <li><strong>Random Forest</strong> : Très performant.</li>
+                    <li><strong>XGBoost</strong> : <strong>Vainqueur</strong> (Meilleur compromis F1-Score / AUC).</li>
+                </ul>
+            </div>
+            <div class="image-wrapper">
+                <img src="metrics_comparison.png" alt="Comparaison des métriques des modèles">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 7: Matrice de Confusion -->
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">Évaluation : Matrices de Confusion</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <p>L'analyse des matrices de confusion sur le <strong>Set de Test (jamais vu par le modèle)</strong> montre comment les modèles d'ensemble réduisent les erreurs :</p>
+                <div class="card" style="margin-top: 30px;">
+                    <h4 style="color: #2563eb; font-size: 20px; margin-bottom: 10px;">Pourquoi XGBoost / Random Forest ?</h4>
+                    <p>Ils maximisent la détection des vrais départs (Vrais Positifs) tout en minimisant les fausses alertes (Faux Positifs), garantissant un ciblage marketing rentable.</p>
+                </div>
+            </div>
+            <div class="multi-image-grid">
+                <div class="image-wrapper">
+                    <img src="cm_XGBoost.png" alt="Matrice de confusion XGBoost">
+                </div>
+                <div class="image-wrapper">
+                    <img src="cm_RandomForest.png" alt="Matrice de confusion Random Forest">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 8: Régression CLV -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">Régression : Prédiction des Dépenses</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="card" style="justify-content: center;">
+                <h3>Random Forest Regressor</h3>
+                <p>Contrairement au Churn, la régression a été effectuée sur les 19 variables <strong>brutes standardisées</strong> (sans PCA) pour conserver l'interprétabilité des résultats (ex: l'impact direct de la quantité totale).</p>
+                <div style="background: #f1f5f9; padding: 15px; border-radius: 8px; margin-top: 20px; border-left: 4px solid #10b981;">
+                    <p style="margin: 0; font-weight: bold;">Score R² : Excellente corrélation linéaire.</p>
+                </div>
+                <p style="margin-top: 20px;">Le modèle parvient à modéliser la tendance des dépenses futures, même face à des montants très hétérogènes.</p>
+            </div>
+            <div class="image-wrapper">
+                <img src="regression_scatter.png" alt="Scatter plot Régression">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Clustering -->
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">Segmentation Non Supervisée : K-Means</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3>Détermination du nombre de Clusters</h3>
+                <p>La <strong>méthode du coude (Elbow Curve)</strong>, appliquée sur l'espace PCA, permet de déterminer mathématiquement le point de cassure de l'inertie.</p>
+                <p>Le modèle segmente ensuite la base client en groupes comportementaux distincts (VIP, Actifs, À Risque...).</p>
+            </div>
+            <div class="multi-image-grid">
+                <div class="image-wrapper">
+                    <img src="elbow_curve.png" alt="Elbow Curve">
+                </div>
+                <div class="image-wrapper">
+                    <img src="clusters_2d.png" alt="Clusters 2D PCA">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 10: Démo Vidéo Streamlit -->
+<div class="slide-container" id="slide10">
+    <h2 class="slide-title">4. Déploiement : Démonstration de l'Application</h2>
+    <div class="content-area" style="width: 100%;">
+        <div class="demo-screen" style="width: 100%; max-width: 960px; height: 480px; background-color: #000; border: 4px solid #1e293b; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+            <!-- Remplacer "ma_demo.mp4" par le nom exact de votre fichier vidéo -->
+            <video width="100%" height="100%" controls style="object-fit: cover; background-color: #000;">
+                <source src="demo_ML.mp4" type="video/mp4">
+                Votre navigateur ne prend pas en charge la balise vidéo.
+            </video>
+        </div>
+        <p style="margin-top: 20px; font-style: italic; color: #64748b;">Aperçu du fonctionnement du tableau de bord Streamlit.</p>
+    </div>
+</div>
+
+<!-- Slide 11: Conclusion -->
+<div class="slide-container" id="slide11">
+    <h2 class="slide-title">Conclusion & Perspectives</h2>
+    <div class="content-area" style="align-items: stretch;">
+        <div class="conclusion-box">
+            <h3><i class="fa-solid fa-check-circle" style="color: #2563eb;"></i> Ce qui a été accompli</h3>
+            <p>Création d'un pipeline complet et robuste de Machine Learning (Nettoyage, PCA, Modélisation, Déploiement) capable d'anticiper les départs avec une précision de <strong>~84%</strong> et de prévoir les budgets futurs.</p>
+        </div>
+        
+        <div class="two-column">
+            <div class="card">
+                <h3 style="color: #ef4444;">Limites du Modèle</h3>
+                <ul class="custom-list">
+                    <li><strong>Données statiques :</strong> Le modèle ne prend pas en compte les évolutions temporelles en temps réel (saisonnalité dynamique).</li>
+                    <li><strong>Sensibilité :</strong> La régression reste légèrement sensible aux valeurs extrêmes (VIPs hors normes).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3 style="color: #10b981;">Perspectives (Future Work)</h3>
+                <ul class="custom-list">
+                    <li><strong>Filtrage Collaboratif :</strong> Ajouter un moteur de recommandation de produits basé sur le Cluster assigné.</li>
+                    <li><strong>Deep Learning :</strong> Explorer des réseaux de neurones (RNN/LSTM) pour analyser les séquences temporelles d'achat.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 12: Q&A -->
+<div class="slide-container" id="slide12">
+    <div class="qa-layout">
+        <h2>Mercie pour votre attention!</h2>
+        <div class="contact-info">
+            <i class="fa-brands fa-github"></i> https://github.com/islemkaddoussi/projet_ML.git
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

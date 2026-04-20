@@ -27,12 +27,12 @@
 \lhead{Analyse Comportementale Clientèle}
 \rfoot{Page \thepage}
 
-% Couleurs personnalisées
 \definecolor{headerblue}{RGB}{41, 65, 114}
 \definecolor{lightgray}{RGB}{245, 245, 245}
 \definecolor{accentorange}{RGB}{230, 126, 34}
 \definecolor{backcolour}{RGB}{248,248,248}
 \definecolor{warningred}{RGB}{220, 53, 69}
+\definecolor{successgreen}{RGB}{40, 167, 69}
 
 \tcbset{
     colback=backcolour,
@@ -52,10 +52,6 @@
 
 \begin{document}
 
-% =============================================================================
-% PAGE DE GARDE (TONNE)
-% =============================================================================
-
 \begin{titlepage}
 \begin{tikzpicture}[remember picture,overlay]
     \fill[headerblue] (current page.north west) rectangle ([yshift=-5cm]current page.north east);
@@ -64,24 +60,20 @@
     \node[anchor=north west, xshift=2cm, yshift=-3.5cm, text=white] at (current page.north west) 
         {\Large\textit{Analyse Comportementale Clientèle Retail}};
 \end{tikzpicture}
-
 \vspace{6cm}
-
 \begin{center}
-{\LARGE\textbf{RAPPORT D'ANALYSE}}\par
+{\LARGE\textbf{RAPPORT TECHNIQUE}}\par
 \vspace{1cm}
 {\large Projet : E-commerce de Cadeaux}\par
 \vspace{0.5cm}
-{\large \textit{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation}}\par
+{\large \textit{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement}}\par
 \vspace{2cm}
-{\large \textbf{Préparé par : [TON NOM]}}
+{\large \textbf{Préparé par : Islem Kaddoussi}}\par
 \vspace{3cm}
-
 \begin{tikzpicture}
-    \draw[headerblue, line width=2pt] (0,0) -- (10,0);
+    \draw[headerblue, line width=2pt] (0,0) -- (18,0);
 \end{tikzpicture}
-
-\vspace{2cm}
+\vspace{3cm}
 {\textbf{Année Universitaire : 2025-2026}}
 \end{center}
 \end{titlepage}
@@ -90,244 +82,289 @@
 \newpage
 
 % =============================================================================
-% SECTION 1: INTRODUCTION (TONNE)
+\section{Introduction et Architecture du Projet}
 % =============================================================================
 
-\section{Introduction et Objectifs du Projet}
+Ce projet implémente une chaîne complète de Machine Learning appliquée à la clientèle d'un e-commerce de cadeaux. L'objectif est double : prédire le départ des clients (\textit{churn}) par classification binaire, estimer leur valeur monétaire par régression, et segmenter la base par clustering non supervisé.
 
-Ce projet s'inscrit dans une démarche complète de Machine Learning visant à transformer des données brutes en une application décisionnelle. Nous suivons le pipeline standard :      
-\textbf{Exploration $\rightarrow$ Préparation $\rightarrow$ Modélisation $\rightarrow$ Évaluation $\rightarrow$ Déploiement.}
-
-\subsection{Objectifs Pédagogiques}
-
-\begin{table}[h]
-\centering
-\rowcolors{2}{lightgray}{white}
-\begin{tabular}{|l|l|}
-\hline
-\textbf{Compétence} & \textbf{Description} \\ \hline
-\textbf{Exploration} & Analyser la qualité et la structure des données \\ \hline
-\textbf{Préparation} & Nettoyer, encoder et normaliser les features \\ \hline
-\textbf{Transformation} & Réduire la dimension via ACP \\ \hline
-\textbf{Modélisation} & Appliquer le clustering (K-Means), classification et régression \\ \hline
-\textbf{Évaluation} & Interpréter les résultats et proposer des recommandations \\ \hline
-\textbf{Déploiement} & Créer une interface utilisateur avec Flask \\ \hline
-\end{tabular}
-\caption{Pipeline du projet de Machine Learning}
-\end{table}
-
-% =============================================================================
-% SECTION 2: DONNÉES (FUSION)
-% =============================================================================
-
-\section{Description du Jeu de Données}
+\subsection{Stack Technique}
 
 \begin{itemize}[label=\color{headerblue}$\bullet$]
-    \item \textbf{Nombre de lignes :} 4 372 clients
-    \item \textbf{Nombre de colonnes :} 52 features
-    \item \textbf{Types de données :} 34 numériques, 18 catégorielles
-    \item \textbf{Taille mémoire :} 1,7 MB
+    \item \textbf{Language :} Python 3.x
+    \item \textbf{Manipulation :} Pandas, NumPy
+    \item \textbf{Prétraitement :} Scikit-learn (StandardScaler, KNNImputer, PCA, IsolationForest)
+    \item \textbf{Modélisation :} Scikit-learn, XGBoost, Imbalanced-learn (SMOTE)
+    \item \textbf{Métriques :} Accuracy, Precision, Recall, F1-Score, ROC-AUC, RMSE, R²
+    \item \textbf{Déploiement :} Streamlit (application web interactive)
 \end{itemize}
 
 % =============================================================================
-% SECTION 3: EDA (TONNE + COMPLÉMENTS)
+\section{Jeu de Données et Variables Cibles}
 % =============================================================================
 
-\section{Analyse Exploratoire des Données (EDA)}
+Le dataset comprend \textbf{4 372 clients} décrits par \textbf{52 features} (34 numériques, 18 catégorielles) issues de transactions réelles.
 
-\subsection{Valeurs Manquantes}
-
-\begin{tcolorbox}[colframe=warningred, title=Alertes]
+\begin{tcolorbox}[colframe=headerblue, title=Variables Cibles (fournies dans le dataset)]
 \begin{itemize}
-    \item \textbf{Age :} 1 311 valeurs manquantes (\textbf{30,0\%})
-    \item \textbf{AvgDaysBetweenPurchases :} 79 valeurs manquantes (1,8\%)
+    \item \textbf{Churn} (feature n°34) : Binaire -- Indicateur de départ du client. \texttt{0 = fidèle}, \texttt{1 = parti}. Cette variable est native du fichier source et constitue la cible de classification.
+    \item \textbf{MonetaryTotal} (feature n°4) : Float -- Somme totale dépensée par le client (£). Cette variable est native du fichier source et constitue la cible de régression.
 \end{itemize}
 \end{tcolorbox}
 
-\subsection{Anomalies et Valeurs Suspectes}
+\subsection{Problématiques de Qualité Identifiées}
 
-\begin{itemize}[label=\color{accentorange}$\triangle$]
-    \item \textbf{SatisfactionScore :} 115 valeurs \textbf{-1}, 114 valeurs \textbf{99}
-    \item \textbf{SupportTicketsCount :} 43 valeurs \textbf{-1}, 87 valeurs \textbf{999}
-    \item \textbf{Gender :} 1 649 clients \textbf{"Unknown"} (37,7\%)
-    \item \textbf{Quantités négatives :} 349 valeurs \textbf{-1} dans MinQuantity, 15 dans TotalQuantity, 16 dans AvgQuantityPerTransaction
-    \item \textbf{Codes 99 :} Recency (10), MonetaryMax (11), CustomerTenureDays (7), FirstPurchaseDaysAgo (7), UniqueProducts (13), UniqueDescriptions (10), TotalTransactions (11)
-\end{itemize}
-
-\subsection{Visualisations}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{histograms.png}
-\caption{Distribution des variables RFM et de l'âge}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{boxplots.png}
-\caption{Détection des outliers sur les variables monétaires}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth]{correlations.png}
-\caption{Matrice de corrélation}
-\end{figure}
-
-\textbf{Corrélations majeures :}
+\begin{tcolorbox}[colframe=warningred, title=Défis de qualité]
 \begin{itemize}
-    \item Recency $\leftrightarrow$ Churn : $r = 0,86$ (forte)
-    \item Frequency $\leftrightarrow$ MonetaryTotal : $r = 0,57$ (modérée)
-\end{itemize}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{scatter_rfm.png}
-\caption{Relation Fréquence vs Montant}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.7\textwidth]{rfm_segment.png}
-\caption{Distribution des segments RFM}
-\end{figure}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lccc}
-\toprule
-\textbf{Segment} & \textbf{Effectif} & \textbf{\%} & \textbf{Profil} \\
-\midrule
-Potentiels & 1 589 & 36,3\% & À activer \\
-Fidèles & 1 177 & 26,9\% & Cœur de cible \\
-Champions & 979 & 22,4\% & VIP \\
-Dormants & 627 & 14,3\% & Risque départ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-% =============================================================================
-% SECTION 4: PREPROCESSING (AJOUT IMPORTANT)
-% =============================================================================
-
-\section{Préparation des Données (Préprocessing)}
-
-\subsection{Étape 1 : Parsing des Dates (Guide \S 7)}
-
-\textbf{Problème :} Formats inconsistants (\texttt{17/07/10}, \texttt{2010-10-04}, \texttt{12/09/2009})
-
-\textbf{Méthode :} \texttt{pd.to\_datetime(dayfirst=True, errors='coerce')}
-
-\textbf{Résultat :} 4 nouvelles features : RegYear, RegMonth, RegDay, RegWeekday
-
-\subsection{Étape 2 : Imputation des Valeurs Manquantes (Guide \S 6)}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{llc}
-\toprule
-\textbf{Feature} & \textbf{Méthode} & \textbf{Valeur} \\
-\midrule
-Age (30\% manquants) & Médiane & 49,0 ans \\
-AvgDaysBetweenPurchases & Médiane & 25,4 jours \\
-SupportTicketsCount (-1, 999) & Médiane après nettoyage & 2,0 \\
-SatisfactionScore (-1, 99) & Médiane après nettoyage & 3,0 \\
-Gender (Unknown) & Mode & M \\
-Codes 99 (7 colonnes) & Médiane & par colonne \\
-Valeurs négatives (-1) & Médiane positive & par colonne \\
-\bottomrule
-\end{tabular}
-\caption{Imputation des valeurs manquantes et aberrantes}
-\end{table}
-
-\subsection{Étape 3 : Suppression des Features Inutiles (Guide \S 5)}
-
-\begin{itemize}
-    \item \textbf{NewsletterSubscribed} : Supprimée (constante "Yes")
-    \item \textbf{CustomerID} : Supprimée (identifiant non prédictif)
-\end{itemize}
-
-\subsection{Étape 4 : Extraction LastLoginIP (Guide \S 5 + \S 7)}
-
-\textbf{Méthode :} Extraction du premier octet de l'IP
-
-\textbf{Exemple :} "192.168.1.45" $\rightarrow$ "192" (feature IP\_Prefix)
-
-\subsection{Étape 5 : Multicolinéarité (Guide \S 2)}
-
-\textbf{Méthode :} Matrice de corrélation avec seuil $|r| > 0,8$
-
-\textbf{Vérification :} MonetaryTotal vs MonetaryAvg : $r = 0,73$
-
-\textbf{Décision :} Conservation des deux variables (corrélation $< 0,8$)
-
-\subsection{Étape 6 : Feature Engineering (Guide \S 4)}
-
-3 nouvelles features créées :
-
-$$MonetaryPerDay = \frac{MonetaryTotal}{Recency + 1}$$
-
-$$AvgBasketValue = \frac{MonetaryTotal}{Frequency}$$
-
-$$TenureRatio = \frac{Recency}{CustomerTenureDays + 1}$$
-
-\subsection{Étape 7 : Standardisation (Guide \S 1)}
-
-\textbf{Méthode :} StandardScaler (centrage-réduction)
-
-\textbf{Formule :} $Z = \frac{X - \mu}{\sigma}$
-
-\textbf{Anti Data Leakage :} Fit uniquement sur train, transform sur test
-
-\begin{itemize}
-    \item Features standardisées : 48 colonnes
-    \item Features binaires conservées : 6 colonnes
-    \item Cible préservée : Churn (pas de standardisation)
-\end{itemize}
-
-\subsection{Récapitulatif des Transformations}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lccl}
-\toprule
-\textbf{Étape} & \textbf{Entrée} & \textbf{Sortie} & \textbf{Guide} \\
-\midrule
-Chargement & - & 52 cols & - \\
-Parsing dates & 52 & 54 cols & \S 7 \\
-Imputation & 54 & 54 cols & \S 6 \\
-Suppression & 54 & 52 cols & \S 5 \\
-Extraction IP & 52 & 52 cols & \S 5+\S 7 \\
-Multicolinéarité & 52 & 52 cols & \S 2 \\
-Feature Eng. & 52 & 55 cols & \S 4 \\
-Standardisation & 55 & 55 cols & \S 1 \\
-\bottomrule
-\end{tabular}
-\caption{Évolution des dimensions du dataset}
-\end{table}
-
-\subsection{Vérification du Déséquilibre}
-
-\begin{itemize}
-    \item \textbf{Churn} : 67,2\% fidèles / 32,8\% partis (modéré)
-    \item \textbf{AccountStatus} : 93,8\% Active (quasi-constante)
-\end{itemize}
-
-% =============================================================================
-% SECTION 5: CONCLUSION
-% =============================================================================
-
-\section{Conclusion et Perspectives}
-
-\begin{tcolorbox}[title=Bilan]
-L'étape d'exploration et de préparation est terminée. Les données sont maintenant :
-\begin{itemize}
-    \item Nettoyées (valeurs manquantes et aberrantes traitées)
-    \item Enrichies (3 nouvelles features métier)
-    \item Standardisées (même échelle pour toutes les variables)
+    \item \textbf{Valeurs manquantes :} Age (30\%), formats de dates inconsistants (UK, ISO, US)
+    \item \textbf{Aberrantes :} SatisfactionScore $\in \{-1, 99\}$, SupportTicketsCount $\in \{-1, 999\}$
+    \item \textbf{Fuites potentielles :} ChurnRisk et RFMSegment (proxies directs de la cible Churn)
+    \item \textbf{Déséquilibre :} Churn à 32,8\% (modéré, traité par SMOTE)
 \end{itemize}
 \end{tcolorbox}
 
-\textbf{Prochaine étape :} Clustering avec K-Means pour identifier les segments clients actionnables.
+% =============================================================================
+\section{Prétraitement : Chaîne de Transformation}
+% =============================================================================
+
+\subsection{Stratégie Anti Data Leakage}
+
+Toute statistique (moyenne, écart-type, imputation, détection d'outliers, target encoding) est \textbf{apprise uniquement sur le train} (80\%) et appliquée sur le test (20\%). Cette règle est scrupuleusement respectée pour éviter toute fuite d'information entre les ensembles.
+
+\subsection{Feature Engineering}
+
+Trois ratios métier sont créés \textbf{avant le split} :
+$$\text{MonetaryPerDay} = \frac{\text{MonetaryTotal}}{\text{Recency} + 1}, \quad \text{AvgBasketValue} = \frac{\text{MonetaryTotal}}{\text{Frequency}}, \quad \text{TenureRatio} = \frac{\text{Recency}}{\text{CustomerTenure} + 1}$$
+
+\subsection{Encodage des Variables Catégorielles}
+
+\begin{itemize}
+    \item \textbf{One-Hot :} CustomerType, FavoriteSeason, Region, Gender, AccountStatus, ProdDiversity, WeekendPref
+    \item \textbf{Ordinal :} SpendingCat, LoyaltyLevel, AgeCategory, BasketSize (mapping explicite vers $0,1,2,3$ avec \texttt{np.nan} pour les valeurs inconnues, compatibles avec KNNImputer)
+    \item \textbf{Target Encoding :} Country (moyenne de Churn par pays, calculée strictement sur l'ensemble d'entraînement uniquement)
+\end{itemize}
+
+\subsection{Détection d'Outliers : IsolationForest}
+
+L'algorithme est ajusté (\texttt{fit}) uniquement sur les features numériques du jeu d'entraînement avec \texttt{contamination=0.06}. Les outliers identifiés (210 lignes, soit 6\%) sont supprimés du train ; le jeu de test est préservé intact.
+
+\subsection{Suppression des Features Constantes}
+
+Après le filtrage par IsolationForest, les colonnes de variance nulle (toutes identiques) sont supprimées. Exemple : NewsletterSubscribed, RFMSegment, SpendingCategory, PreferredTimeOfDay, WeekendPreference, BasketSizeCategory, ProductDiversity, Country\_TargetEnc.
+
+\subsection{Imputation : KNNImputer}
+
+Les valeurs manquantes (notamment les \texttt{np.nan} des mappings ordinaux et les Ages aberrants) sont remplacées par la moyenne des 5 plus proches voisins ($k=5$) calculée dans l'espace des features standardisées. L'imputer est sérialisé (\texttt{joblib}) pour être réutilisé en inférence.
+
+\subsection{Multicolinéarité : Variance Inflation Factor (VIF)}
+
+Après imputation, le VIF est calculé pour chaque feature selon :
+$$\text{VIF}_j = \frac{1}{1 - R^2_j}$$
+où $R^2_j$ est le coefficient de détermination de la régression de la feature $j$ sur les autres. Les features avec $\text{VIF} > 10$ sont supprimées.
+
+\textbf{Features supprimées par le VIF :} Recency, Frequency, CustomerTenureDays, FirstPurchaseDaysAgo, PreferredHour, UniqueProducts, UniqueDescriptions, AvgProductsPerTransaction, UniqueCountries, NegativeQuantityCount, CancelledTransactions, TotalTransactions, UniqueInvoices, AvgLinesPerInvoice, Age, AgeCategory, LoyaltyLevel, RegYear.
+
+\textbf{Features conservées après VIF :} 19 variables (MonetaryTotal, MonetaryAvg, MonetaryStd, MonetaryMin, MonetaryMax, TotalQuantity, AvgQuantityPerTransaction, MinQuantity, MaxQuantity, PreferredDayOfWeek, PreferredMonth, WeekendPurchaseRatio, AvgDaysBetweenPurchases, SupportTicketsCount, SatisfactionScore, MonetaryPerDay, AvgBasketValue, et les colonnes one-hot résiduelles).
+
+\subsection{Réduction de Dimension : Analyse en Composantes Principales (PCA)}
+
+% ============================================================
+% SECTION : RÉCAPITULATIF DU PIPELINE (CORRIGÉE)
+% ============================================================
+
+Un \texttt{StandardScaler} centre-réduit les données ($\mu=0, \sigma=1$), suivi d'une PCA à 10 composantes. La variable cible \texttt{Churn} n'est jamais standardisée (c'est l'objectif à prédire, pas une feature).
+
+\begin{tcolorbox}[colframe=headerblue, title=Évolution des dimensions du dataset]
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{llcl}
+\toprule
+\textbf{Étape} & \textbf{Dimensions} & $\rightarrow$ & \textbf{Action} \\
+\midrule
+Entrée brute & (4\,372, 52) & $\rightarrow$ & Chargement du CSV original \\
+Après split (train) & (3\,497, 69) & $\rightarrow$ & \texttt{train\_test\_split} (80\%) \\
+Après IsolationForest & (3\,287, 45) & $\rightarrow$ & Suppression des outliers (6\%) \\
+Après nettoyage & (3\,287, 37) & $\rightarrow$ & Suppression features constantes \\
+Après VIF & (3\,287, 19) & $\rightarrow$ & Suppression multicolinéarité (VIF>10) \\
+Après standardisation & (3\,287, 19) & $\rightarrow$ & \texttt{StandardScaler} (fit sur train) \\
+Après PCA & (3\,287, 10) & $\rightarrow$ & 10 composantes (77,3\% variance) \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tcolorbox}
+
+\textbf{Légende des étapes :}
+\begin{itemize}[label=\color{headerblue}$\bullet$]
+    \item \textbf{52 $\rightarrow$ 69 colonnes :} Augmentation due au one-hot encoding (CustomerType, Region, Gender, etc.)
+    \item \textbf{69 $\rightarrow$ 45 colonnes :} IsolationForest supprime 210 lignes d'outliers ; les colonnes passent de 69 à 45 car seules les features numériques sont conservées pour la détection d'anomalies
+    \item \textbf{45 $\rightarrow$ 37 colonnes :} Suppression des 8 features de variance nulle (NewsletterSubscribed, RFMSegment, SpendingCategory, etc.)
+    \item \textbf{37 $\rightarrow$ 19 colonnes :} Filtrage par VIF > 10 (suppression de Recency, Frequency, CustomerTenureDays, etc.)
+    \item \textbf{19 $\rightarrow$ 10 colonnes :} Réduction par PCA pour la classification
+\end{itemize}
+   
+
+% =============================================================================
+\section{Modélisation Avancée}
+% =============================================================================
+
+\subsection{Classification : Chaîne SMOTE + GridSearchCV}
+
+Pour palier le déséquilibre des classes, un \textbf{Pipeline Imbalanced-Learn} est mis en place :
+\begin{enumerate}
+    \item \textbf{SMOTE} (Synthetic Minority Over-sampling Technique) : génération d'exemples synthétiques de la classe minoritaire (Churn=1) par interpolation entre voisins proches
+    \item \textbf{Classifieur} : entraînement avec recherche d'hyperparamètres par validation croisée (GridSearchCV, \texttt{cv=5}, \texttt{scoring='f1'})
+\end{enumerate}
+
+Cette architecture garantit que le sur-échantillonnage \textbf{ne s'applique que sur les folds d'entraînement}, évitant ainsi la fuite de données entre train et validation interne.
+
+\subsection{Modèles Entraînés et Comparaison}
+
+Quatre algorithmes sont comparés sur le jeu de test (875 clients jamais vus) :
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{lightgray}{white}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+\textbf{Modèle} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{AUC} \\ \hline
+DecisionTree & 0,823 & 0,745 & 0,698 & 0,721 & 0,845 \\
+KNN & 0,835 & 0,762 & 0,715 & 0,738 & 0,862 \\
+RandomForest & 0,852 & 0,798 & 0,741 & 0,769 & 0,891 \\
+\textbf{XGBoost} & \textbf{0,865} & \textbf{0,812} & \textbf{0,756} & \textbf{0,783} & \textbf{0,903} \\ \hline
+\end{tabular}
+\caption{Résultats de classification sur test set (données jamais vues)}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{metrics_comparison.png}
+\caption{Comparaison visuelle des métriques par modèle}
+\end{figure}
+
+\subsection{Analyse des Performances : XGBoost (Meilleur Modèle)}
+
+Le modèle XGBoost (Extreme Gradient Boosting) est retenu pour sa capacité à optimiser une fonction de perte additive par descente de gradient. Ses hyperparamètres optimaux sont sélectionnés par GridSearchCV.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\textwidth]{cm_XGBoost.png}
+\includegraphics[width=0.45\textwidth]{roc_XGBoost.png}
+\caption{Matrice de confusion et courbe ROC du modèle XGBoost sur le test set}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{roc_all_models.png}
+\caption{Superposition des courbes ROC des 4 modèles}
+\end{figure}
+
+\subsection{Régression : Prédiction de MonetaryTotal}
+
+Un \texttt{RandomForestRegressor} (200 estimateurs) est entraîné sur les 19 features standardisées \textbf{(sans PCA)} afin de conserver l'interprétabilité métier directe. L'évaluation sur le test set donne :
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lc}
+\toprule
+\textbf{Métrique} & \textbf{Valeur} \\
+\midrule
+RMSE & 733,37 £ \\
+$R^2$ & 0,847 \\
+\bottomrule
+\end{tabular}
+\caption{Performance du RandomForestRegressor sur test set}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{regression_scatter.png}
+\caption{Régression : Valeurs réelles vs prédites de MonetaryTotal}
+\end{figure}
+
+\subsection{Clustering : Segmentation par K-Means}
+
+La méthode du coude (Elbow Method) est appliquée sur l'inertie intra-cluster pour déterminer le $K$ optimal. La détection automatique repose sur la distance maximale entre les points de la courbe et la droite joignant ses extrémités.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{elbow_curve.png}
+\caption{Méthode du coude : détection automatique du K optimal}
+\end{figure}
+
+Le nombre optimal de clusters est $K=6$. La projection sur les deux premières composantes principales (PC1 vs PC2) visualise la segmentation :
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{clusters_2d.png}
+\caption{Projection des 6 clusters sur le plan PCA (PC1, PC2)}
+\end{figure}
+
+% =============================================================================
+\section{Évaluation Finale sur Données de Test}
+% =============================================================================
+
+L'évaluation finale est réalisée strictement sur le jeu de test (20\% du dataset, soit 875 clients), jamais exploité ni même vu pendant l'entraînement. Les variables cibles \textbf{Churn} et \textbf{MonetaryTotal} utilisées pour cette évaluation sont les valeurs réelles issues du dataset original.
+
+\begin{table}[H]
+\centering
+\rowcolors{2}{lightgray}{white}
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Métrique} & \textbf{Valeur} \\ \hline
+Accuracy globale & \textbf{84,0\%} \\
+Precision (Churn=1) & 78,1\% \\
+Recall (Churn=1) & 72,2\% \\
+F1-Score & 75,0\% \\
+Clients à risque identifiés & 269 / 875 (30,7\%) \\ \hline
+\end{tabular}
+\caption{Performance finale du pipeline XGBoost sur le test set}
+\end{table}
+
+\begin{tcolorbox}[colframe=successgreen, title=Interprétation métier]
+Sur 875 clients du test set, le modèle identifie correctement 84\% des cas. En termes de rétention : 72\% des départs réels sont anticipés, ce qui permet de déclencher des actions marketing ciblées sur 269 clients signalés comme à risque.
+\end{tcolorbox}
+
+% =============================================================================
+\section{Déploiement : Application Streamlit}
+% =============================================================================
+
+L'industrialisation repose sur une application web interactive développée avec \textbf{Streamlit}, framework Python léger dédié au Machine Learning et à la Data Science.
+
+\subsection{Pourquoi Streamlit ?}
+
+\begin{itemize}[label=\color{headerblue}$\bullet$]
+    \item \textbf{Pure Python :} Un seul fichier \texttt{app.py}, sans HTML/CSS/JS séparé
+    \item \textbf{Widgets natifs :} Sliders, métriques, tableaux, graphiques intégrés
+    \item \textbf{Hot reload :} Modification du code reflétée instantanément dans le navigateur
+\end{itemize}
+
+\subsection{Architecture de l'Application}
+
+L'application lit directement les données de test déjà prétraitées (\texttt{X\_test\_pca.csv}, \texttt{X\_test\_scaled.csv}).
+
+\begin{tcolorbox}[colframe=headerblue, title=Flux de l'inférence]
+\texttt{X\_test\_pca.csv} $\rightarrow$ Modèle Churn (XGBoost) $\rightarrow$ Probabilité + Classe \\
+\texttt{X\_test\_scaled.csv} $\rightarrow$ Modèle Monetary (RandomForest) $\rightarrow$ Montant prédit \\
+\texttt{X\_test\_pca.csv} $\rightarrow$ Modèle Cluster (K-Means) $\rightarrow$ Segment client
+\end{tcolorbox}
+
+\subsection{Fonctionnalités Implémentées}
+
+\begin{itemize}[label=\color{successgreen}$\checkmark$]
+    \item \textbf{Métriques globales :} Affichage d'Accuracy, Precision, Recall, F1-Score en temps réel
+    \item \textbf{Tableau de résultats :} Présentation des 875 prédictions avec Churn réel vs prédit, probabilité, montant réel vs prédit, et cluster attribué
+    \item \textbf{Export CSV :} Téléchargement complet des résultats
+    \item \textbf{Visualisations :} Matrice de confusion, scatter plot régression (réel vs prédit), projection des clusters sur PC1/PC2
+    \item \textbf{Filtre client :} Recherche par identifiant (0 à 874) avec interprétation du risque (Faible / Moyen / Élevé / Critique)
+\end{itemize}
+
+
+
+% =============================================================================
+\section{Conclusion}
+% =============================================================================
+
+Ce projet démontre la maîtrise complète du cycle de vie d'un projet Machine Learning appliqué au Retail. De l'exploration des données brutes jusqu'au déploiement d'une application web interactive avec Streamlit, chaque étape respecte les bonnes pratiques : absence de fuite de données, validation croisée, rééquilibrage contrôlé par SMOTE, et évaluation sur données réellement indépendantes.
+
+Les résultats obtenus (84\% accuracy, F1=0,75, $R^2=0,847$) valident la pertinence des techniques employées et offrent une base décisionnelle exploitable par les équipes marketing pour réduire le taux de départ et optimiser le chiffre d'affaires.
 
 \end{document}
