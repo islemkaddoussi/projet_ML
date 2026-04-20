@@ -1,7 +1,6 @@
 # 🛍️ Retail Churn Predictor — Analyse Comportementale Clientèle
 
 > Atelier Machine Learning · Module GI2 · Année universitaire 2025-2026  
-> Préparé par Fadoua Drira
 
 Chaîne complète de traitement ML appliquée à un dataset e-commerce de cadeaux :  
 **Exploration → Préparation → Modélisation → Évaluation → Déploiement**
@@ -32,10 +31,7 @@ projet_ml_retail/
 ├── app/
 │   └── app.py                  # Application web Flask
 ├── reports/
-│   ├── confusion_matrix.png
-│   ├── roc_curve.png
-│   ├── model_comparison.csv
-│   └── predictions.csv
+│
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -109,28 +105,19 @@ python src/predict.py
 
 Applique le pipeline complet sur `data/train_test/X_test_brut_40.csv` et sauvegarde les résultats dans `reports/predictions.csv`.
 
-### Étape 4 — Interface web Flask
-
+### Étape 4 — Dashboard Interactif Streamlit
+ 
 ```bash
-python app/app.py
+streamlit run app/app.py
 ```
 
-Ouvrir [http://127.0.0.1:5000](http://127.0.0.1:5000) dans votre navigateur.
+Ouvrir http://localhost:8501 dans votre navigateur.
 
-| Route | Description |
-|-------|-------------|
-| `GET /` | Formulaire de saisie manuelle d'un client |
-| `POST /predict` | Prédiction (HTML ou JSON selon Content-Type) |
-| `GET /batch` | Prédiction sur les 40 clients de test |
-| `GET /health` | Vérification que les modèles sont chargés |
+Fonctionnalités du Dashboard :
 
-**Appel API (JSON) :**
+📁 Importation Batch : Uploadez un fichier CSV pour analyser des centaines de profils clients simultanément.
 
-```bash
-curl -X POST http://127.0.0.1:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{"Recency": 45, "Frequency": 3, "MonetaryAvg": 60, "Age": 28}'
-```
+📊 Visualisation KPI : Affichage dynamique du niveau de risque, du taux de Churn prédictif, et des revenus projetés.
 
 ---
 
